@@ -1,0 +1,38 @@
+//Demanem variables
+enter cuaInscripcio, proximitat, puntsAcumulats, puntsNen
+enter germaCentre, viuPoblacio, feinaPoblacio, discapacitat, familia, mateixaEscola
+//Assignem variables de punts
+puntsAcumulats = 0
+puntsNen = 0
+proximitat = 0
+//Demanem dades
+mostra → “Número d'inscripció: “
+cuaInscripcio = llegir enter
+mostra → “Te algun germà al centre? 0=no, 1=si “
+germaCentre = llegir enter
+mostra → “Viu a la població on esta situada l'escola? 0=no, 1=si “
+viuPoblacio = llegir enter
+mostra → “Algun dels pares treballa a la mateixa població? 0=no, 1=si“
+feinaPoblacio = llegir enter
+mostra → “Te alguna discapacitat igual o superior al 33% o malaltia crònica? 0=no, 1=si“
+discapacitat = llegir enter
+mostra → “Forma part d'una família nombrosa o monoparental? 0=no, 1=si“
+familia = llegir enter
+mostra → “El pare, mare, tutor legal o germà ha estat escolaritzat a l'escola? 0=no, 1=si“
+mateixaEscola = llegir enter
+//Sumem punts amb condicions adecuades
+si germaCentre = 1 → puntsAcumulats = puntsAcumulats + 40
+//Fem servir la variable proximitat per determinar quants punts sumar
+si feinaPoblacio = 1 → proximitat = proximitat +20
+si mateixaPoblacio = → proximitat = proximitat +10
+puntsAcumulats = puntsAcumulats + proximitat
+si discapacitat = 1 → puntsAcumulats = puntsAcumulats + 10
+si familia = 1 → puntsAcumulats = puntsAcumulats + 15
+si mateixaEscola = 1 → puntsAcumulats = puntsAcumulats + 5
+//Asignem els punts totals a puntsNen I tornem a posar a 0 les variables auxiliars
+puntsNen = puntsAcumulats
+proximitat = 0
+puntsAcumulats = 0
+//Mostra punts finals
+mostra → “La puntuació es:”
+mostra → punts
