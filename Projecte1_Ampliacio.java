@@ -28,7 +28,7 @@ public class AmpliacioP1 {
         Scanner input = new Scanner(System.in);
 
         //Declarem variables
-        int id, places, respostaIdioma, room, telf, attempts, nFamilies =0;
+        int id, places, respostaIdioma, room, telf, attempts, nFamilies = 0;
         String parlaIdioma, allotjament;
         boolean inRange;
         boolean keepAsking;
@@ -69,9 +69,9 @@ public class AmpliacioP1 {
                 input.nextLine();
             }
 
-            if (attempts != MAX_ATTEMPTS) {
-                inRange=false;
-                attempts=0;
+            if (attempts < MAX_ATTEMPTS) {
+                inRange = false;
+                attempts = 0;
             }
             //Demanem que s'introdueixi una dada fins que el valor introduit esta dins el rang acceptat
             while (!inRange && attempts < MAX_ATTEMPTS) {
@@ -90,9 +90,9 @@ public class AmpliacioP1 {
                 input.nextLine();
             }
 
-            if (attempts != MAX_ATTEMPTS) {
-                inRange=false;
-                attempts=0;
+            if (attempts < MAX_ATTEMPTS) {
+                inRange = false;
+                attempts = 0;
             }
 
             //Demanem que s'introdueixi una dada fins que el valor introduit esta dins el rang acceptat
@@ -105,16 +105,16 @@ public class AmpliacioP1 {
                         inRange = false;
                     }
                 }
-                if (!inRange){
+                if (!inRange) {
                     System.out.println(ERROR_MSG);
                     attempts++;
                 }
                 input.nextLine();
             }
 
-            if (attempts != MAX_ATTEMPTS) {
-                inRange=false;
-                attempts=0;
+            if (attempts < MAX_ATTEMPTS) {
+                inRange = false;
+                attempts = 0;
                 //Mostra informacio relativa al tipus d'allotjament a l'usuari
                 System.out.println("De quin tipus d'allotjament es tracta?:");
                 System.out.println("      (0) habitació compartida:");
@@ -141,9 +141,9 @@ public class AmpliacioP1 {
                 input.nextLine();
             }
 
-            if (attempts != MAX_ATTEMPTS) {
-                inRange=false;
-                attempts=0;
+            if (attempts < MAX_ATTEMPTS) {
+                inRange = false;
+                attempts = 0;
             }
 
             //Demanem que s'introdueixi una dada fins que el valor introduit esta dins el rang acceptat
@@ -156,25 +156,17 @@ public class AmpliacioP1 {
                         inRange = false;
                     }
                 }
-                if (!inRange){
+                if (!inRange) {
                     System.out.println(ERROR_MSG);
                     attempts++;
                 }
                 input.nextLine();
             }
 
-            if (attempts != MAX_ATTEMPTS) {
-            /*
-            Fem les seguents operacions fora dels loops per facilitar la lectura del programa
-            hem inicialitzat parlaidioma a "no" nomes la cambiem a "si" si es respon 1 a la pregunta
-            */
-                if (respostaIdioma == SI) {
-                    parlaIdioma = PARLA_SI;
-                }
-            /*
-            Seleccionem la constant string a mostrar segons la responsta obentida
-            com que en aquest punt room nomes pot ser 1 2 o 3 si no es 1 o 2 passem a default, perque ha de ser 3 per força
-            */
+            if (attempts < MAX_ATTEMPTS) {
+
+                if (respostaIdioma == SI) parlaIdioma = PARLA_SI;
+
                 switch (room) {
                     case 0:
                         allotjament = SHARED;
@@ -210,7 +202,7 @@ public class AmpliacioP1 {
                         inRange = false;
                     }
                 }
-                if (!inRange){
+                if (!inRange) {
                     System.out.println(ERROR_MSG);
                     attempts++;
                 }
@@ -221,6 +213,6 @@ public class AmpliacioP1 {
                 keepAsking = false;
             }
         } while (keepAsking);
-        System.out.println("\nS'han introduit les dades de: "+nFamilies+" families");
+        System.out.println("\nS'han introduit les dades de: " + nFamilies + " families");
     }
 }
