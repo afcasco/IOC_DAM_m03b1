@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class E10_FernandezC {
 
-    //Declaracio de constants
+    //Constants declaration
     private static final int NUM_MIN = 20;
     private static final int NUM_MAX = 100;
     private static final int EXIT = -1;
@@ -12,7 +12,7 @@ public class E10_FernandezC {
 
     public static void main(String[] args) {
 
-        //Declaracio de variables
+        //variables declaration
         Scanner istream = new Scanner(System.in);
         boolean inRange;
         int limit = 0;
