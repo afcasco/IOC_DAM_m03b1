@@ -14,14 +14,12 @@ public class E10_FernandezC {
 
         //variables declaration
         Scanner input = new Scanner(System.in);
+        int limit = 0, repeat = 0, cumulative, totalOdds;
         boolean inRange;
-        int limit = 0;
-        int repeat = 0;
-        int cumulative;
-        int totalOdds;
 
         //run until repeat reaches N_LOOPS
         do {
+
             //assign inside the loop to avoid carry-over between runs
             inRange = true;
             cumulative = 0;
@@ -32,6 +30,7 @@ public class E10_FernandezC {
 
             //run while conditions are not met (exit with a valid number or -1)
             do {
+
                 //Will only show the error message after the first run
                 if (!inRange) System.out.println("Invalid input, stick to the rules please!");
                 System.out.println("Enter an integer between 20 and 100 (-1 to exit): ");
@@ -47,10 +46,12 @@ public class E10_FernandezC {
             if (inRange) {
                 System.out.println("Odd numbers in the given range:");
                 for (int i = 0; i <= limit; i++) {
+
                     //Only print odd numbers and increment totalOdds
                     if (i % 2 != 0) {
                         System.out.print(i);
                         totalOdds++;
+
                         //Avoid trailing comma and print how many odds were found
                         if (i < limit - 1) System.out.print(", ");
                         else System.out.print("  (" + totalOdds + " found!)");
@@ -61,7 +62,6 @@ public class E10_FernandezC {
 
                 //If we exit the loop with -1 print error message
             } else System.out.println("\nEXIT TRIGGERED BY USER");
-
             repeat++;
         } while (repeat < N_LOOPS);
     }
