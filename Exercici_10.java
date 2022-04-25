@@ -21,7 +21,7 @@ public class E10_FernandezC {
 
         //run until repeat reaches N_LOOPS
         do {
-            //assing inside the loop to avoid carry-over between runs
+            //assign inside the loop to avoid carry-over between runs
             inRange = true;
             cumulative = 0;
             System.out.println("\n----------------------------------");
@@ -43,7 +43,7 @@ public class E10_FernandezC {
                 istream.nextLine();
             } while (!inRange && limit != EXIT);
 
-            //If we got a valid number run this
+            //If loop was ended with valid number (not -1)
             if (inRange) {
                 System.out.println("Odds in given range:");
                 for (int i = 0; i <= limit; i++) {
@@ -56,7 +56,7 @@ public class E10_FernandezC {
                 }
                 System.out.println("\nAll added odds in range: " + cumulative);
 
-                //If we exit with -1 print error message
+                //If we exit the loop with -1 print error message
             } else {
                 System.out.println("EXIT TRIGGERED BY USER");
             }
