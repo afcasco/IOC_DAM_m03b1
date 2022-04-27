@@ -8,23 +8,22 @@ public class Arrays {
 		Scanner input = new Scanner(System.in);
 
 		//ask for array size
-		System.out.println("Quantes persones s'han d'entrar: ");
+		System.out.println("Quantes persones vols entrar: ");
 		people = input.nextInt();
-		System.out.println("Llegirem el codi de "+people+" persones.\r");
 
 		//declare array when we have 'people' value
 		int[] userCode = new int[people];
 
 		//Collect data into array
 		for (int i=0;i<people;i++) {
-			System.out.println("Introdueix el codi: ");
+			System.out.println("Entra el codi de l'usuari: ");
 			userCode[i]= input.nextInt();	
 		}
 
 		//Show all array values	
-		System.out.println("Els codis introduits son: ");
+		System.out.println("\nLlistat de codis entrats: ");
 		for (int i=0;i<people;i++) {
-		    System.out.println("Codi: "+userCode[i]+" a la posicio "+(i)+"\r");
+		    System.out.println(userCode[i]);
 		}
 
 		//bubble sort array values
@@ -39,9 +38,9 @@ public class Arrays {
         }
         
         //Show all rearanged array values
-        System.out.println("Els valors dels codis ordenats son: ");
+        System.out.println("\nLlistat ordenat de tots els codis entrats: ");
         for (int i=0;i<people;i++) {
-		    System.out.println("codi: "+userCode[i]+" a la posicio "+(i)+"\r");
+		    System.out.println(userCode[i]);
 		}
 	}
 }
