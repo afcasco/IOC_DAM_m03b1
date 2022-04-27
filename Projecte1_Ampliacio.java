@@ -49,7 +49,7 @@ public class AmpliacioP1 {
             System.out.println("\n********************************************************************");
             System.out.println("* Mode d'introducció de dades, el sistema no acceptara cap dada    *");
             System.out.println("* fora dels rangs demanats, si es comet un error tornara a demanar *");
-            System.out.println("* la mateixa dada fins que compleixi el format demanat. Gracies.   *");
+            System.out.println("* la mateixa dada 3 vegades.                                       *");
             System.out.println("********************************************************************\n");
 
             //Demanem que s'introdueixi una dada fins que el valor introduit esta dins el rang acceptat
