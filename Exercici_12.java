@@ -7,11 +7,9 @@ public class Arrays {
 		int people;
 		Scanner input = new Scanner(System.in);
 
-		//ask for array size
+		//ask for array size and declare array
 		System.out.println("Quantes persones vols entrar: ");
 		people = input.nextInt();
-
-		//declare array when we have 'people' value
 		int[] userCode = new int[people];
 
 		//Collect data into array
