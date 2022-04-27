@@ -1,5 +1,3 @@
-package FamiliesAcollida;
-
 import java.util.Scanner;
 
 public class AmpliacioP1 {
@@ -15,13 +13,13 @@ public class AmpliacioP1 {
     private static final int SI = 1;
     private static final int NO = 0;
     private static final int MAX_ATTEMPTS = 3;
-    private static final String SHARED = "Habitació compartida             ";
-    private static final String SINGLE = "Habitació                        ";
+    private static final String SHARED = "Habitacio compartida             ";
+    private static final String SINGLE = "Habitacio                        ";
     private static final String HOME = "Habitatge sencer                 ";
-    private static final String DORM = "Sala comunitària, local habilitat";
+    private static final String DORM = "Sala comunitaria, local habilitat";
     private static final String PARLA_SI = "si";
     private static final String PARLA_NO = "no";
-    private static final String ERROR_MSG = "Error, input de dades no vàlida";
+    private static final String ERROR_MSG = "Error, input de dades no valida";
 
     public static void main(String[] args) {
 
@@ -47,7 +45,7 @@ public class AmpliacioP1 {
             inRange = false;
             //Mostrem a l'usuari com s'han d'introduir les dades
             System.out.println("\n********************************************************************");
-            System.out.println("* Mode d'introducció de dades, el sistema no acceptara cap dada    *");
+            System.out.println("* Mode d'introduccio de dades, el sistema no acceptara cap dada    *");
             System.out.println("* fora dels rangs demanats, si es comet un error tornara a demanar *");
             System.out.println("* la mateixa dada 3 vegades.                                       *");
             System.out.println("********************************************************************\n");
@@ -75,7 +73,7 @@ public class AmpliacioP1 {
             }
             //Demanem que s'introdueixi una dada fins que el valor introduit esta dins el rang acceptat
             while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("Introdueix número de places disponible (1-99):");
+                System.out.println("Introdueix numero de places disponible (1-99):");
                 inRange = input.hasNextInt();
                 if (inRange) {
                     places = input.nextInt();
@@ -117,10 +115,10 @@ public class AmpliacioP1 {
                 attempts = 0;
                 //Mostra informacio relativa al tipus d'allotjament a l'usuari
                 System.out.println("De quin tipus d'allotjament es tracta?:");
-                System.out.println("      (0) habitació compartida:");
-                System.out.println("      (1) habitació:");
-                System.out.println("      (2) habitatge sencer:");
-                System.out.println("      (3) sala comunitària, local habilitat:");
+                System.out.println("      (0) "+SHARED);
+                System.out.println("      (1) "+SINGLE);
+                System.out.println("      (2) "+HOME);
+                System.out.println("      (3) "+DORM);
             }
 
             //Demanem que s'introdueixi una dada fins que el valor introduit esta dins el rang acceptat
@@ -183,7 +181,7 @@ public class AmpliacioP1 {
                 }
 
                 //Presentem les dades per pantalla tabulades correctament
-                System.out.println("Id\t\tplaces\t\trus/ucraïnès\t\ttipus\t\t\t\t\t\t\t\t\ttelèfon");
+                System.out.println("Id\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
                 System.out.println(id + "\t\t" + places + "\t\t\t" + parlaIdioma + "\t\t\t\t\t" + allotjament + "\t\t" + telf);
                 nFamilies++;
             } else {
