@@ -30,7 +30,7 @@ public class Projecte1 {
 
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
-    int id, places, respostaIdioma, room, telf, attempts, nFamilies = 0;
+    int id, places, respostaIdioma, room, telf, attempts, nFam = 0;
     String parlaIdioma, allotjament;
     boolean inRange;
     boolean keepAsking;
@@ -185,15 +185,15 @@ public class Projecte1 {
         }
 
         //SUBSTITUTE variables for pos in array (pending)
-        families[nFamilies][ID_ARRAY] = id;
-        families[nFamilies][PLACES_ARRAY] = places;
-        families[nFamilies][IDIOMA_ARRAY] = respostaIdioma;
-        families[nFamilies][ROOM_ARRAY] = room;
-        families[nFamilies][TELF_ARRAY] = telf;
+        families[nFam][ID_ARRAY] = id;
+        families[nFam][PLACES_ARRAY] = places;
+        families[nFam][IDIOMA_ARRAY] = respostaIdioma;
+        families[nFam][ROOM_ARRAY] = room;
+        families[nFam][TELF_ARRAY] = telf;
     
         System.out.println("Id\tplaces\trus/ucrans\ttipus\t\t\t\t\ttelon");
         System.out.println(id + "\t" + places + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + telf);
-        nFamilies++;
+        nFam++;
         //Si s'introdueix una dada malament 3 vegades arribarem a aquest missatge
       } else if (!exit) {
         System.out.println("------------------------------------------------------");
@@ -224,11 +224,11 @@ public class Projecte1 {
         keepAsking = false;
       }
     } while (keepAsking);
-    System.out.println("\nS'han introduit les dades de: " + nFamilies + " families");
+    System.out.println("\nS'han introduit les dades de: " + nFam + " families");
 
 
 
-    for (int i = 0; i < nFamilies; i++) {
+    for (int i = 0; i < nFam; i++) {
       if (families[i][2] == 0) {
         parlaIdioma = PARLA_SI;
       } else {
