@@ -1,5 +1,7 @@
 import java.util.Scanner;
+
 public class Projecte1 {
+
   private static final int ID_MIN = 10;
   private static final int ID_MAX = 999;
   private static final int PLACES_MIN = 1;
@@ -19,6 +21,13 @@ public class Projecte1 {
   private static final String PARLA_NO = "no";
   private static final String ERROR_MSG = "Error, input de dades no vlida";
   private static final int END_CURRENT = -1;
+  private static final int ID_ARRAY = 0;
+  private static final int PLACES_ARRAY = 1;
+  private static final int IDIOMA_ARRAY = 2;
+  private static final int ROOM_ARRAY = 3;
+  private static final int TELF_ARRAY = 4;
+
+
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
     int id, places, respostaIdioma, room, telf, attempts, nFamilies = 0;
@@ -174,11 +183,14 @@ public class Projecte1 {
           allotjament = DORM;
           break;
         }
-        families[nFamilies][0] = id;
-        families[nFamilies][1] = places;
-        families[nFamilies][2] = respostaIdioma;
-        families[nFamilies][3] = room;
-        families[nFamilies][4] = telf;
+
+        //SUBSTITUTE variables for pos in array (pending)
+        families[nFamilies][ID_ARRAY] = id;
+        families[nFamilies][PLACES_ARRAY] = places;
+        families[nFamilies][IDIOMA_ARRAY] = respostaIdioma;
+        families[nFamilies][ROOM_ARRAY] = room;
+        families[nFamilies][TELF_ARRAY] = telf;
+    
         System.out.println("Id\tplaces\trus/ucrans\ttipus\t\t\t\t\ttelon");
         System.out.println(id + "\t" + places + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + telf);
         nFamilies++;
@@ -213,6 +225,9 @@ public class Projecte1 {
       }
     } while (keepAsking);
     System.out.println("\nS'han introduit les dades de: " + nFamilies + " families");
+
+
+
     for (int i = 0; i < nFamilies; i++) {
       if (families[i][2] == 0) {
         parlaIdioma = PARLA_SI;
@@ -229,7 +244,7 @@ public class Projecte1 {
         allotjament = DORM;
       }
       System.out.println("Id\tplaces\trus/ucrans\ttipus\t\t\t\t\ttelon");
-      System.out.println(families[i][0] + "\t" + families[i][1] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + families[i][4]);
+      System.out.println(families[i][ID_ARRAY] + "\t" + families[i][PLACES_ARRAY] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + families[i][TELF_ARRAY]);
     }
   }
 }
