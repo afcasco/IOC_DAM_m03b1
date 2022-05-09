@@ -36,7 +36,7 @@ public class Projecte1 {
     boolean keepAsking;
     int keepAskingInt;
     boolean exit;
-    int[][] families = new int[100][5];
+    int[][] families = new int[10][5];
     do {
       exit = false;
       keepAsking = true;
