@@ -227,7 +227,7 @@ public class Projecte1 {
     System.out.println("\nS'han introduit les dades de: " + nFam + " families");
 
 
-
+    System.out.println("Id\tplaces\trus/ucrans\ttipus\t\t\t\t\ttelon");
     for (int i = 0; i < nFam; i++) {
       if (families[i][2] == 0) {
         parlaIdioma = PARLA_SI;
@@ -243,7 +243,6 @@ public class Projecte1 {
       } else {
         allotjament = DORM;
       }
-      System.out.println("Id\tplaces\trus/ucrans\ttipus\t\t\t\t\ttelon");
       System.out.println(families[i][ID_ARRAY] + "\t" + families[i][PLACES_ARRAY] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + families[i][TELF_ARRAY]);
     }
   }
