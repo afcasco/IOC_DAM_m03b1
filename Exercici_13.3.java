@@ -7,7 +7,7 @@ public class RecorregutTotalmentOcupat{
     //Recorrem array y mostrem notes mes grans o = que 9 i la posicio a la que es troben  
     for (int i = 0; i < arrayNotes.length; i++) {
       if(arrayNotes[i]>=9f) {
-        System.out.println("Hi ha un "+arrayNotes[i]+" a la posicio "+i)
+        System.out.println("Hi ha un "+arrayNotes[i]+" a la posicio "+i);
       }
     }
     
