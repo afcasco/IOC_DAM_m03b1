@@ -22,6 +22,7 @@ public class Projecte1 {
   private static final String ERROR_MSG = "Error, input de dades no vlida";
   private static final int END_CURRENT = -1;
 
+
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
     int attempts, nFam = 0;
@@ -31,7 +32,7 @@ public class Projecte1 {
     int keepAskingInt;
     boolean exit;
 
-    
+    //declare arrays to store data (max 10 families)
     int[] id = new int [10];
     int[] places = new int [10];
     int[] respostaIdioma = new int [10];
@@ -51,6 +52,7 @@ public class Projecte1 {
       parlaIdioma = PARLA_NO;
       inRange = false;
 
+      //family id input
       while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
         System.out.println("Introdueix id familia (10-999):");
         inRange = input.hasNextInt();
@@ -69,6 +71,8 @@ public class Projecte1 {
         }
         input.nextLine();
       }
+
+      //how many people it can host input
       if (attempts < MAX_ATTEMPTS && !exit) {
         inRange = false;
         attempts = 0;
@@ -91,6 +95,8 @@ public class Projecte1 {
         }
         input.nextLine();
       }
+      
+      //speaks ru/ukr input
       if (attempts < MAX_ATTEMPTS && !exit) {
         inRange = false;
         attempts = 0;
@@ -113,6 +119,8 @@ public class Projecte1 {
         }
         input.nextLine();
       }
+
+      //room type input
       if (attempts < MAX_ATTEMPTS && !exit) {
         inRange = false;
         attempts = 0;
@@ -122,6 +130,7 @@ public class Projecte1 {
         System.out.println("      (2) " + HOME);
         System.out.println("      (3) " + DORM);
       }
+
       while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
         System.out.println("Introdueix una de les opcions:");
         inRange = input.hasNextInt();
@@ -140,6 +149,8 @@ public class Projecte1 {
         }
         input.nextLine();
       }
+
+      //tel # input
       if (attempts < MAX_ATTEMPTS && !exit) {
         inRange = false;
         attempts = 0;
@@ -181,7 +192,7 @@ public class Projecte1 {
           break;
         }
 
-    
+        //Prints current family data
         System.out.println("Id\tplaces\trus/ucrans\ttipus\t\t\t\t\ttelon");
         System.out.println(id[nFam] + "\t" + places[nFam] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + telf[nFam]);
         nFam++;
@@ -194,6 +205,8 @@ public class Projecte1 {
         System.out.println("------------------------------------------------------");
         System.out.println("\nEntrada actual cancelada per operador");
       }
+
+      //input to manage keep running/stop
       inRange = false;
       attempts = 0;
       while (!inRange && attempts < MAX_ATTEMPTS) {
@@ -217,7 +230,7 @@ public class Projecte1 {
     } while (keepAsking);
     System.out.println("\nS'han introduit les dades de: " + nFam + " families");
 
-
+    //Print all families data
     System.out.println("Id\tplaces\trus/ucrans\ttipus\t\t\t\t\ttelon");
     for (int i = 0; i < nFam; i++) {
       if (respostaIdioma[i] == 0) {
