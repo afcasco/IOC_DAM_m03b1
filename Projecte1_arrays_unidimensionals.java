@@ -21,12 +21,6 @@ public class Projecte1 {
   private static final String PARLA_NO = "no";
   private static final String ERROR_MSG = "Error, input de dades no vlida";
   private static final int END_CURRENT = -1;
-  private static final int ID_ARRAY = 0;
-  private static final int PLACES_ARRAY = 1;
-  private static final int IDIOMA_ARRAY = 2;
-  private static final int ROOM_ARRAY = 3;
-  private static final int TELF_ARRAY = 4;
-
 
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
