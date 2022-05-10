@@ -21,6 +21,7 @@ public class Projecte1 {
   private static final String PARLA_NO = "no";
   private static final String ERROR_MSG = "Error, input de dades no vlida";
   private static final int END_CURRENT = -1;
+  private static final int MAX_FAMILIES = 10;
 
 
   public static void main(String[] args) {
@@ -33,11 +34,11 @@ public class Projecte1 {
     boolean exit;
 
     //declare arrays to store data (max 10 families)
-    int[] id = new int [10];
-    int[] places = new int [10];
-    int[] respostaIdioma = new int [10];
-    int[] room = new int [10];
-    int[] telf = new int [10];
+    int[] id = new int [MAX_FAMILIES];
+    int[] places = new int [MAX_FAMILIES];
+    int[] respostaIdioma = new int [MAX_FAMILIES];
+    int[] room = new int [MAX_FAMILIES];
+    int[] telf = new int [MAX_FAMILIES];
 
     do {
       exit = false;
