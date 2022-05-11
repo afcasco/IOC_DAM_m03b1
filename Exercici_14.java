@@ -9,7 +9,6 @@ public class E14_FernandezC {
 		boolean maleFound= false;
 		boolean womanFound= false;
 
-
 		int[][] dades =  {{3457,1,51,52},	   
 					  	{3467,1,32,41},	   
 						{3568,0,14,57},	   
@@ -45,18 +44,14 @@ public class E14_FernandezC {
 		} while(!womanFound);
 		System.out.println("posicio primera dona "+firstW);
 
-		//get male winner row position
+		//get winners row position
 		int maxMale = dades[firstM][3];
+		int maxWoman = dades[firstW][3];
 		for(int x=0;x<dades.length;x++) {
 			if(dades[x][3]<maxMale && dades[x][1]==0) {
 				maxMale= dades[x][3];
 				winnerM=x;
 			}
-		}
-
-		//get winner woman row position
-		int maxWoman = dades[firstW][3];
-		for(int x=0;x<dades.length;x++) {
 			if(dades[x][3]<maxWoman && dades[x][1]==1) {
 				maxWoman= dades[x][3];
 				winnerW=x;
