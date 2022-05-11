@@ -24,7 +24,10 @@ public class E14_FernandezC {
 						{3576,0,57,48}};
 
 		for(int i=0;i<dades.length;i++) {
-			System.out.println("Dorsal: "+dades[i][0]);
+			for (int j=0;j<dades[i].length;j++){
+				System.out.print(dades[i][j]+ " ");
+			}
+			System.out.println();
 		}
 
 		//find first male in array
@@ -61,6 +64,8 @@ public class E14_FernandezC {
 
 		System.out.println("el guanyadora femenina es troba a la pos: "+winnerW);
 		System.out.println("el guanyador masculi es troba al a pos: "+winnerM);
+
+		System.out.println("camps "+dades[0].length);
 
 	}
 }
