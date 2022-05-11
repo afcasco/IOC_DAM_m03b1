@@ -1,5 +1,8 @@
 public class E14_FernandezC {
 
+	public static final int MALE = 0;
+ 	public static final int WOMAN = 1;
+
 	public static void main(String[] args) {
 
 		int winnerM=0;
@@ -27,7 +30,7 @@ public class E14_FernandezC {
 		//find first male in array
 		int i=0;
 		do {
-			if(dades[i][1]==0) {
+			if(dades[i][1]==MALE) {
 				firstM=i;
 				maleFound = true;	
 			} else i++;
@@ -36,7 +39,7 @@ public class E14_FernandezC {
 		//find first woman in array
 		int j=0;
 		do {
-			if(dades[j][1]==0) {
+			if(dades[j][1]==WOMAN) {
 				firstM=j;
 				womanFound = true;	
 			} else j++;
@@ -46,11 +49,11 @@ public class E14_FernandezC {
 		int maxMale = dades[firstM][3];
 		int maxWoman = dades[firstW][3];
 		for(int x=0;x<dades.length;x++) {
-			if(dades[x][3]<maxMale && dades[x][1]==0) {
+			if(dades[x][3]<maxMale && dades[x][1]==MALE) {
 				maxMale= dades[x][3];
 				winnerM=x;
 			}
-			if(dades[x][3]<maxWoman && dades[x][1]==1) {
+			if(dades[x][3]<maxWoman && dades[x][1]==WOMAN) {
 				maxWoman= dades[x][3];
 				winnerW=x;
 			}
@@ -58,5 +61,6 @@ public class E14_FernandezC {
 
 		System.out.println("el guanyadora femenina es troba a la pos: "+winnerW);
 		System.out.println("el guanyador masculi es troba al a pos: "+winnerM);
+
 	}
 }
