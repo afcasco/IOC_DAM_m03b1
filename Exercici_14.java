@@ -32,7 +32,6 @@ public class E14_FernandezC {
 				maleFound = true;	
 			} else i++;
 		} while(!maleFound);
-		System.out.println("posicio primer home "+firstM);
 
 		//find first woman in array
 		int j=0;
@@ -42,7 +41,6 @@ public class E14_FernandezC {
 				womanFound = true;	
 			} else j++;
 		} while(!womanFound);
-		System.out.println("posicio primera dona "+firstW);
 
 		//get winners row position
 		int maxMale = dades[firstM][3];
@@ -60,6 +58,5 @@ public class E14_FernandezC {
 
 		System.out.println("el guanyadora femenina es troba a la pos: "+winnerW);
 		System.out.println("el guanyador masculi es troba al a pos: "+winnerM);
-
 	}
 }
