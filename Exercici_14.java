@@ -25,6 +25,7 @@ public class E14_FernandezC {
                             {3575,1,24,77},
                             {3576,0,57,48}};
 
+      	//show data
         for (int i = 0; i < dades.length; i++) {
             for (int j = 0; j < dades[i].length; j++) {
                 System.out.print(dades[i][j] + " ");
@@ -32,7 +33,7 @@ public class E14_FernandezC {
             System.out.println();
         }
 
-        //get first male and female
+        //get first male and female row
         int i = 0;
         do {
             if (dades[i][1] == MALE && !maleFound) {
@@ -59,11 +60,8 @@ public class E14_FernandezC {
                 winnerF = x;
             }
         }
-
+        //print winners
         System.out.println(" male WINNER in pos: " + winnerM);
         System.out.println(" female WINNER in pos: " + winnerF);
-
-
     }
 }
-
