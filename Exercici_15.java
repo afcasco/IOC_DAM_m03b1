@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
 
-public class strings {
+public class E15_FernandezC {
 
 	public static void main(String[] args) {
 
@@ -12,17 +12,16 @@ public class strings {
 		String password = "";
 		String[] splitName = fullName.split(" ");
 		Random rand = new Random();
-		int randomNum;
 		
-     //concatenate 2 first leters of name and surname
+		
+        //concatenate 2 first leters of name and surname
 		for(int i=0;i<2;i++) {
 			password = password + splitName[0].charAt(i) + splitName[1].charAt(i);
 		}
         
-    //add 4 random digits
+        //add 4 random digits
 		for(int i=0;i<4;i++) {
-			randomNum= rand.nextInt(limit);
-			password += randomNum;
+			password += rand.nextInt(limit);
 		}
 		//print password
 		System.out.println("The new password is "+password);
