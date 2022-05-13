@@ -127,11 +127,7 @@ public class FamiliesAcollida {
             //room type input and question decoration
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
-                System.out.println("De quin tipus d'allotjament es tracta?:");
-                System.out.println("      (0) " + SHARED);
-                System.out.println("      (1) " + SINGLE);
-                System.out.println("      (2) " + HOME);
-                System.out.println("      (3) " + DORM);
+                printRoomType();
             }
             while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
                 System.out.println("Introdueix una de les opcions:");
@@ -361,5 +357,13 @@ public class FamiliesAcollida {
                     System.out.println(ERROR_MSG);
                     attempts++;
                 }
+    }
+
+    public void printRoomType(){
+        System.out.println("De quin tipus d'allotjament es tracta?:");
+        System.out.println("      (0) " + SHARED);
+        System.out.println("      (1) " + SINGLE);
+        System.out.println("      (2) " + HOME);
+        System.out.println("      (3) " + DORM);
     }
 }
