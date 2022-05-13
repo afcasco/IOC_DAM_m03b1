@@ -1,9 +1,8 @@
-//old switch statements so it works in online java compilers
-
 import java.util.Scanner;
 
 public class FamiliesAcollida {
 
+    //declare constants
     private static final int ID_MIN = 10;
     private static final int ID_MAX = 999;
     private static final int PLACES_MIN = 1;
@@ -36,6 +35,7 @@ public class FamiliesAcollida {
     int attempts;
     boolean inRange;
     boolean exit;
+    String parlaIdioma;
 
     public static void main(String[] args) {
         
@@ -46,21 +46,15 @@ public class FamiliesAcollida {
     public void inici() {
 
         showHowToInputData();
-
         Scanner input = new Scanner(System.in);
-        
         int keepAskingInt;
         int queryPlaces = 0;
         int placesDisplay = 0;
         int showStats = 0;
         int totalPlaces = 0;
         int totalIdioma = 0;
-        String parlaIdioma;
         boolean keepAsking;
     
-
-        
-
         do {
             exit = false;
             keepAsking = true;
@@ -86,10 +80,7 @@ public class FamiliesAcollida {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
 
@@ -109,10 +100,7 @@ public class FamiliesAcollida {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
 
@@ -132,10 +120,7 @@ public class FamiliesAcollida {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
 
@@ -160,10 +145,7 @@ public class FamiliesAcollida {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
 
@@ -183,10 +165,7 @@ public class FamiliesAcollida {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
 
@@ -213,10 +192,7 @@ public class FamiliesAcollida {
                         inRange = false;
                     }
                 }
-                if (!inRange) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
             if (attempts == MAX_ATTEMPTS || keepAskingInt == 0) {
@@ -264,10 +240,7 @@ public class FamiliesAcollida {
                         inRange = false;
                     }
                 }
-                if (!inRange) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
 
@@ -352,10 +325,7 @@ public class FamiliesAcollida {
                         inRange = false;
                     }
                 }
-                if (!inRange) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+                printErrorOnBadValue();
                 input.nextLine();
             }
 
@@ -368,10 +338,8 @@ public class FamiliesAcollida {
                 System.out.println("\nNumero de families que acullen: " + nFam);
                 System.out.println("Numero de places totals: " + totalPlaces);
                 System.out.println("Nimero de families que parlen rus/ucraines: " + totalIdioma);
-
             }
         }
-
     }
 
     public void showHowToInputData() {
@@ -383,13 +351,15 @@ public class FamiliesAcollida {
         System.out.println("***************************************************************************\n");
     }
 
-    public void switchRoomType() {
-
-    }
-
     public void resetForNextQuestion() {
         inRange = false;
         attempts = 0;
     }
 
+    public void printErrorOnBadValue(){
+                if (!inRange) {
+                    System.out.println(ERROR_MSG);
+                    attempts++;
+                }
+    }
 }
