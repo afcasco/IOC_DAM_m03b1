@@ -24,7 +24,10 @@ public class FamiliesAcollida {
     private static final int END_CURRENT = -1;
     private static final int MAX_FAMILIES = 10;
 
+    
+
     //declare arrays to store data (max 10 families)
+    Scanner input = new Scanner(System.in);
     int[] id = new int[MAX_FAMILIES];
     int[] places = new int[MAX_FAMILIES];
     int[] respostaIdioma = new int[MAX_FAMILIES];
@@ -45,8 +48,9 @@ public class FamiliesAcollida {
 
     public void inici() {
 
+        
         showHowToInputData();
-        Scanner input = new Scanner(System.in);
+        
         int keepAskingInt;
         int queryPlaces = 0;
         int placesDisplay = 0;
@@ -67,104 +71,33 @@ public class FamiliesAcollida {
             attempts = 0;
             inRange = false;
 
-            //family id input
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix id familia (10-999):");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    id[nFam] = input.nextInt();
-                    if (id[nFam] < ID_MIN || id[nFam] > ID_MAX) {
-                        inRange = false;
-                        if (id[nFam] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
-            }
-
-            //how many spots input
+            id[nFam] = getInput("Introdueix id familia (10-999)", ID_MIN, ID_MAX);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix numero de places disponible (1-99):");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    places[nFam] = input.nextInt();
-                    if (places[nFam] < PLACES_MIN || places[nFam] > PLACES_MAX) {
-                        inRange = false;
-                        if (places[nFam] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
+
+            //spots input
+            places[nFam] = getInput("Introdueix numero de places disponible (1-99", PLACES_MIN, PLACES_MAX);
+            if (attempts < MAX_ATTEMPTS && !exit) {
+                resetForNextQuestion();
             }
+            
 
             //speaks ru/ukr input
-            if (attempts < MAX_ATTEMPTS && !exit) {
-                resetForNextQuestion();
-            }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Parla rus o ucraines? (si: 1/ no:0):");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    respostaIdioma[nFam] = input.nextInt();
-                    if (respostaIdioma[nFam] < NO || respostaIdioma[nFam] > SI) {
-                        inRange = false;
-                        if (respostaIdioma[nFam] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
-            }
-
+            respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", NO, SI);
             //room type input and question decoration
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
                 printRoomType();
             }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix una de les opcions:");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    room[nFam] = input.nextInt();
-                    if (room[nFam] < ROOM_MIN || room[nFam] > ROOM_MAX) {
-                        inRange = false;
-                        if (room[nFam] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
-            }
-
-            //mobile # input
+            room[nFam] = getInput("Introdueix una de les opcions:", ROOM_MIN, ROOM_MAX);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix un telefon de contacte:");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    telf[nFam] = input.nextInt();
-                    if (telf[nFam] < TELF_MIN || telf[nFam] > TELF_MAX) {
-                        inRange = false;
-                        if (telf[nFam] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
-            }
 
+            //mobile # input
+            telf[nFam] = getInput("Introdueix un telefon de contacte:", TELF_MIN, TELF_MAX);
+            
             //3 failed input attempts error msg
             if (attempts == MAX_ATTEMPTS) {
                 System.out.println("------------------------------------------------------");
@@ -227,18 +160,8 @@ public class FamiliesAcollida {
 
             //chose view stats input
             resetForNextQuestion();
-            while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("\nVols consultar per numero de places?(si: 1/ no:0)");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    queryPlaces = input.nextInt();
-                    if (queryPlaces < NO || queryPlaces > SI) {
-                        inRange = false;
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
-            }
+            queryPlaces = getInput("Vols consultar per numero de places (si: 1/ no:0)?", NO, SI);
+          
 
             //Show stats if showStats input was 1
             if (queryPlaces == 1) {
@@ -269,18 +192,7 @@ public class FamiliesAcollida {
 
                 //ask how many spots needed
                 resetForNextQuestion();
-                while (!inRange && attempts < MAX_ATTEMPTS) {
-                    System.out.println("\nQuantes places necessiteu?");
-                    inRange = input.hasNextInt();
-                    if (inRange) {
-                        placesDisplay = input.nextInt();
-                        if (placesDisplay < PLACES_MIN || placesDisplay > PLACES_MAX) {
-                            inRange = false;
-                        }
-                    }
-                    printErrorOnBadValue();
-                    input.nextLine();
-                }
+                placesDisplay = getInput("Quantes places necessiteu?", PLACES_MIN, PLACES_MAX);
 
                 System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
                 for (int i = 0; i < nFam; i++) {
@@ -363,4 +275,24 @@ public class FamiliesAcollida {
         System.out.println("      (2) " + HOME);
         System.out.println("      (3) " + DORM);
     }
+
+    public int getInput(String inputText, int min, int max){
+        int curInput=0;
+        while(!inRange && attempts < MAX_ATTEMPTS && !exit){
+            System.out.println(inputText);
+            inRange = input.hasNextInt();
+            if(inRange) {
+                curInput = input.nextInt();
+                if(curInput<min||curInput>max){
+                    inRange=false;
+                    if(curInput==END_CURRENT){
+                        exit=true;
+                    }
+                }
+            }
+            printErrorOnBadValue();
+            input.nextLine();
+        }
+        return curInput;
+    }  
 }
