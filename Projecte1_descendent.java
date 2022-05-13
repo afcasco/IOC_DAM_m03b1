@@ -24,8 +24,6 @@ public class FamiliesAcollida {
     private static final int END_CURRENT = -1;
     private static final int MAX_FAMILIES = 10;
 
-    
-
     //declare arrays to store data (max 10 families)
     Scanner input = new Scanner(System.in);
     int[] id = new int[MAX_FAMILIES];
@@ -39,18 +37,23 @@ public class FamiliesAcollida {
     boolean inRange;
     boolean exit;
     String parlaIdioma;
+    int i = 0;
 
     public static void main(String[] args) {
-        
+
         FamiliesAcollida programa = new FamiliesAcollida();
         programa.inici();
     }
 
     public void inici() {
 
-        
-        showHowToInputData();
-        
+        //Mostrem a l'usuari com s'han d'introduir les dades
+        System.out.println("\n***************************************************************************");
+        System.out.println("* El sistema no acceptara cap dada fora dels rangs demanats               *");
+        System.out.println("* Introduir la mteixa dada malament 3 vegades cancelara la entrada actual *");
+        System.out.println("* Si t'equivoques introdueix -1 per cancelar la entrada manualment        *");
+        System.out.println("***************************************************************************\n");
+
         int keepAskingInt;
         int queryPlaces = 0;
         int placesDisplay = 0;
@@ -58,7 +61,7 @@ public class FamiliesAcollida {
         int totalPlaces = 0;
         int totalIdioma = 0;
         boolean keepAsking;
-    
+
         do {
             exit = false;
             keepAsking = true;
@@ -81,7 +84,6 @@ public class FamiliesAcollida {
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
-            
 
             //speaks ru/ukr input
             respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", NO, SI);
@@ -97,7 +99,7 @@ public class FamiliesAcollida {
 
             //mobile # input
             telf[nFam] = getInput("Introdueix un telefon de contacte:", TELF_MIN, TELF_MAX);
-            
+
             //3 failed input attempts error msg
             if (attempts == MAX_ATTEMPTS) {
                 System.out.println("------------------------------------------------------");
@@ -138,30 +140,13 @@ public class FamiliesAcollida {
             //Print all families data
             System.out.println("Id\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
             for (int i = 0; i < nFam; i++) {
-                if (respostaIdioma[i] == 1) {
-                    parlaIdioma = PARLA_SI;
-                } else parlaIdioma = PARLA_NO;
-                switch (room[i]) {
-                case 0:
-                    allotjament = SHARED;
-                    break;
-                case 1:
-                    allotjament = SINGLE;
-                    break;
-                case 2:
-                    allotjament = HOME;
-                    break;
-                default:
-                    allotjament = DORM;
-                    break;
-                };
+                switchIntAnswerToString();
                 System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + parlaIdioma + "\t\t\t\t\t" + allotjament + "\t\t" + telf[i]);
             }
 
             //chose view stats input
             resetForNextQuestion();
             queryPlaces = getInput("Vols consultar per numero de places (si: 1/ no:0)?", NO, SI);
-          
 
             //Show stats if showStats input was 1
             if (queryPlaces == 1) {
@@ -197,23 +182,7 @@ public class FamiliesAcollida {
                 System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
                 for (int i = 0; i < nFam; i++) {
                     if (places[i] >= placesDisplay) {
-                        if (respostaIdioma[i] == 1) {
-                            parlaIdioma = PARLA_SI;
-                        } else parlaIdioma = PARLA_NO;
-                        switch (room[i]) {
-                        case 0:
-                            allotjament = SHARED;
-                            break;
-                        case 1:
-                            allotjament = SINGLE;
-                            break;
-                        case 2:
-                            allotjament = HOME;
-                            break;
-                        default:
-                            allotjament = DORM;
-                            break;
-                        };
+                        switchIntAnswerToString();
                         System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + parlaIdioma + "\t\t\t\t\t" + allotjament + "\t\t" + telf[i]);
                     }
                 }
@@ -247,28 +216,19 @@ public class FamiliesAcollida {
         }
     }
 
-    public void showHowToInputData() {
-        //Mostrem a l'usuari com s'han d'introduir les dades
-        System.out.println("\n***************************************************************************");
-        System.out.println("* El sistema no acceptara cap dada fora dels rangs demanats               *");
-        System.out.println("* Introduir la mteixa dada malament 3 vegades cancelara la entrada actual *");
-        System.out.println("* Si t'equivoques introdueix -1 per cancelar la entrada manualment        *");
-        System.out.println("***************************************************************************\n");
-    }
-
     public void resetForNextQuestion() {
         inRange = false;
         attempts = 0;
     }
 
-    public void printErrorOnBadValue(){
-                if (!inRange) {
-                    System.out.println(ERROR_MSG);
-                    attempts++;
-                }
+    public void printErrorOnBadValue() {
+        if (!inRange) {
+            System.out.println(ERROR_MSG);
+            attempts++;
+        }
     }
 
-    public void printRoomType(){
+    public void printRoomType() {
         System.out.println("De quin tipus d'allotjament es tracta?:");
         System.out.println("      (0) " + SHARED);
         System.out.println("      (1) " + SINGLE);
@@ -276,17 +236,17 @@ public class FamiliesAcollida {
         System.out.println("      (3) " + DORM);
     }
 
-    public int getInput(String inputText, int min, int max){
-        int curInput=0;
-        while(!inRange && attempts < MAX_ATTEMPTS && !exit){
+    public int getInput(String inputText, int min, int max) {
+        int curInput = 0;
+        while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
             System.out.println(inputText);
             inRange = input.hasNextInt();
-            if(inRange) {
+            if (inRange) {
                 curInput = input.nextInt();
-                if(curInput<min||curInput>max){
-                    inRange=false;
-                    if(curInput==END_CURRENT){
-                        exit=true;
+                if (curInput < min || curInput > max) {
+                    inRange = false;
+                    if (curInput == END_CURRENT) {
+                        exit = true;
                     }
                 }
             }
@@ -294,5 +254,25 @@ public class FamiliesAcollida {
             input.nextLine();
         }
         return curInput;
-    }  
+    }
+
+    public void switchIntAnswerToString() {
+        if (respostaIdioma[i] == 1) {
+            parlaIdioma = PARLA_SI;
+        } else parlaIdioma = PARLA_NO;
+        switch (room[i]) {
+        case 0:
+            allotjament = SHARED;
+            break;
+        case 1:
+            allotjament = SINGLE;
+            break;
+        case 2:
+            allotjament = HOME;
+            break;
+        default:
+            allotjament = DORM;
+            break;
+        };
+    }
 }
