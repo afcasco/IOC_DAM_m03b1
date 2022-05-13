@@ -25,6 +25,18 @@ public class FamiliesAcollida {
     private static final int END_CURRENT = -1;
     private static final int MAX_FAMILIES = 10;
 
+    //declare arrays to store data (max 10 families)
+    int[] id = new int[MAX_FAMILIES];
+    int[] places = new int[MAX_FAMILIES];
+    int[] respostaIdioma = new int[MAX_FAMILIES];
+    int[] room = new int[MAX_FAMILIES];
+    int[] telf = new int[MAX_FAMILIES];
+    String allotjament;
+    int nFam = 0;
+    int attempts;
+    boolean inRange;
+    boolean exit;
+
     public static void main(String[] args) {
         
         FamiliesAcollida programa = new FamiliesAcollida();
@@ -33,34 +45,21 @@ public class FamiliesAcollida {
 
     public void inici() {
 
-        //Mostrem a l'usuari com s'han d'introduir les dades
-        System.out.println("\n***************************************************************************");
-        System.out.println("* El sistema no acceptara cap dada fora dels rangs demanats               *");
-        System.out.println("* Introduir la mteixa dada malament 3 vegades cancelara la entrada actual *");
-        System.out.println("* Si t'equivoques introdueix -1 per cancelar la entrada manualment        *");
-        System.out.println("***************************************************************************\n");
+        showHowToInputData();
 
         Scanner input = new Scanner(System.in);
-        int attempts;
+        
         int keepAskingInt;
-        int nFam = 0;
         int queryPlaces = 0;
         int placesDisplay = 0;
         int showStats = 0;
         int totalPlaces = 0;
         int totalIdioma = 0;
         String parlaIdioma;
-        String allotjament;
-        boolean inRange;
         boolean keepAsking;
-        boolean exit;
+    
 
-        //declare arrays to store data (max 10 families)
-        int[] id = new int[MAX_FAMILIES];
-        int[] places = new int[MAX_FAMILIES];
-        int[] respostaIdioma = new int[MAX_FAMILIES];
-        int[] room = new int[MAX_FAMILIES];
-        int[] telf = new int[MAX_FAMILIES];
+        
 
         do {
             exit = false;
@@ -96,8 +95,7 @@ public class FamiliesAcollida {
 
             //how many spots input
             if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
+                resetForNextQuestion();
             }
             while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
                 System.out.println("Introdueix numero de places disponible (1-99):");
@@ -120,8 +118,7 @@ public class FamiliesAcollida {
 
             //speaks ru/ukr input
             if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
+                resetForNextQuestion();
             }
             while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
                 System.out.println("Parla rus o ucraines? (si: 1/ no:0):");
@@ -144,8 +141,7 @@ public class FamiliesAcollida {
 
             //room type input and question decoration
             if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
+                resetForNextQuestion();
                 System.out.println("De quin tipus d'allotjament es tracta?:");
                 System.out.println("      (0) " + SHARED);
                 System.out.println("      (1) " + SINGLE);
@@ -173,8 +169,7 @@ public class FamiliesAcollida {
 
             //mobile # input
             if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
+                resetForNextQuestion();
             }
             while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
                 System.out.println("Introdueix un telefon de contacte:");
@@ -208,8 +203,7 @@ public class FamiliesAcollida {
             }
 
             //ask to continue input
-            inRange = false;
-            attempts = 0;
+            resetForNextQuestion();
             while (!inRange && attempts < MAX_ATTEMPTS) {
                 System.out.println("\nContinuar introduint dades? (si: 1/ no:0)");
                 inRange = input.hasNextInt();
@@ -260,8 +254,7 @@ public class FamiliesAcollida {
             }
 
             //chose view stats input
-            inRange = false;
-            attempts = 0;
+            resetForNextQuestion();
             while (!inRange && attempts < MAX_ATTEMPTS) {
                 System.out.println("\nVols consultar per numero de places?(si: 1/ no:0)");
                 inRange = input.hasNextInt();
@@ -306,8 +299,7 @@ public class FamiliesAcollida {
                 }
 
                 //ask how many spots needed
-                inRange = false;
-                attempts = 0;
+                resetForNextQuestion();
                 while (!inRange && attempts < MAX_ATTEMPTS) {
                     System.out.println("\nQuantes places necessiteu?");
                     inRange = input.hasNextInt();
@@ -350,8 +342,7 @@ public class FamiliesAcollida {
             }
 
             //ask if user wants to show family stats
-            inRange = false;
-            attempts = 0;
+            resetForNextQuestion();
             while (!inRange && attempts < MAX_ATTEMPTS) {
                 System.out.println("\nVols veure un resum estadistic de les dades? (si: 1/ no:0)");
                 inRange = input.hasNextInt();
@@ -381,6 +372,24 @@ public class FamiliesAcollida {
             }
         }
 
+    }
+
+    public void showHowToInputData() {
+        //Mostrem a l'usuari com s'han d'introduir les dades
+        System.out.println("\n***************************************************************************");
+        System.out.println("* El sistema no acceptara cap dada fora dels rangs demanats               *");
+        System.out.println("* Introduir la mteixa dada malament 3 vegades cancelara la entrada actual *");
+        System.out.println("* Si t'equivoques introdueix -1 per cancelar la entrada manualment        *");
+        System.out.println("***************************************************************************\n");
+    }
+
+    public void switchRoomType() {
+
+    }
+
+    public void resetForNextQuestion() {
+        inRange = false;
+        attempts = 0;
     }
 
 }
