@@ -87,11 +87,13 @@ public class FamiliesAcollida {
 
             //speaks ru/ukr input
             respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", NO, SI);
-            //room type input and question decoration
+
+            //reset for next question includes next question room type decoration
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
                 printRoomType();
             }
+            //room type input
             room[nFam] = getInput("Introdueix una de les opcions:", ROOM_MIN, ROOM_MAX);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
