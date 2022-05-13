@@ -140,10 +140,10 @@ public class FamiliesAcollida {
         //if families greater than 0
         if (nFam != 0) {
             //Print all families data
-            System.out.println("Id\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
+            printDataHeader();
             for (int i = 0; i < nFam; i++) {
                 switchIntAnswerToString();
-                System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + parlaIdioma + "\t\t\t\t\t" + allotjament + "\t\t" + telf[i]);
+                printFamilyData();
             }
 
             //chose view stats input
@@ -181,11 +181,11 @@ public class FamiliesAcollida {
                 resetForNextQuestion();
                 placesDisplay = getInput("Quantes places necessiteu?", PLACES_MIN, PLACES_MAX);
 
-                System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
+                printDataHeader();
                 for (int i = 0; i < nFam; i++) {
                     if (places[i] >= placesDisplay) {
                         switchIntAnswerToString();
-                        System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + parlaIdioma + "\t\t\t\t\t" + allotjament + "\t\t" + telf[i]);
+                        printFamilyData();
                     }
                 }
             }
@@ -276,5 +276,13 @@ public class FamiliesAcollida {
             allotjament = DORM;
             break;
         };
+    }
+
+    public void printDataHeader(){
+        System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
+    }
+
+    public void printFamilyData(){
+        System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + parlaIdioma + "\t\t\t\t\t" + allotjament + "\t\t" + telf[i]);
     }
 }
