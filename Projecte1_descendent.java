@@ -278,10 +278,7 @@ public class FamiliesAcollida {
                             inRange = false;
                         }
                     }
-                    if (!inRange) {
-                        System.out.println(ERROR_MSG);
-                        attempts++;
-                    }
+                    printErrorOnBadValue();
                     input.nextLine();
                 }
 
