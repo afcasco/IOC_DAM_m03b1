@@ -23,6 +23,8 @@ public class FamiliesAcollida {
     private static final String ERROR_MSG = "Error, input de dades no valida";
     private static final int END_CURRENT = -1;
     private static final int MAX_FAMILIES = 10;
+    private static final boolean LISTEN_FOR_EXIT = true;
+    private static final boolean DONT_LISTEN_FOR_EXIT = false;
 
     //declare arrays to store data (max 10 families)
     Scanner input = new Scanner(System.in);
@@ -74,19 +76,19 @@ public class FamiliesAcollida {
             attempts = 0;
             inRange = false;
 
-            id[nFam] = getInput("Introdueix id familia (10-999)", ID_MIN, ID_MAX);
+            id[nFam] = getInput("Introdueix id familia (10-999)", ID_MIN, ID_MAX, LISTEN_FOR_EXIT);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
 
             //spots input
-            places[nFam] = getInput("Introdueix numero de places disponible (1-99", PLACES_MIN, PLACES_MAX);
+            places[nFam] = getInput("Introdueix numero de places disponible (1-99", PLACES_MIN, PLACES_MAX, LISTEN_FOR_EXIT);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
 
             //speaks ru/ukr input
-            respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", NO, SI);
+            respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", NO, SI, LISTEN_FOR_EXIT);
 
             //reset for next question includes next question room type decoration
             if (attempts < MAX_ATTEMPTS && !exit) {
@@ -94,13 +96,13 @@ public class FamiliesAcollida {
                 printRoomType();
             }
             //room type input
-            room[nFam] = getInput("Introdueix una de les opcions:", ROOM_MIN, ROOM_MAX);
+            room[nFam] = getInput("Introdueix una de les opcions:", ROOM_MIN, ROOM_MAX, LISTEN_FOR_EXIT);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
 
             //mobile # input
-            telf[nFam] = getInput("Introdueix un telefon de contacte:", TELF_MIN, TELF_MAX);
+            telf[nFam] = getInput("Introdueix un telefon de contacte:", TELF_MIN, TELF_MAX, LISTEN_FOR_EXIT);
 
             //3 failed input attempts error msg
             if (attempts == MAX_ATTEMPTS) {
@@ -116,18 +118,7 @@ public class FamiliesAcollida {
 
             //ask to continue input
             resetForNextQuestion();
-            while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("\nContinuar introduint dades? (si: 1/ no:0)");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    keepAskingInt = input.nextInt();
-                    if (keepAskingInt < NO || keepAskingInt > SI) {
-                        inRange = false;
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
-            }
+            keepAskingInt = getInput("\nContinuar introduint dades? (si: 1/ no:0)", NO, SI, DONT_LISTEN_FOR_EXIT);
             if (attempts == MAX_ATTEMPTS || keepAskingInt == 0) {
                 keepAsking = false;
             }
@@ -148,38 +139,14 @@ public class FamiliesAcollida {
 
             //chose view stats input
             resetForNextQuestion();
-            queryPlaces = getInput("Vols consultar per numero de places (si: 1/ no:0)?", NO, SI);
+            queryPlaces = getInput("Vols consultar per numero de places (si: 1/ no:0)?", NO, SI, DONT_LISTEN_FOR_EXIT);
 
             //Show stats if showStats input was 1
             if (queryPlaces == 1) {
-                //Bubble sort around places[i]
-                for (int i = 0; i < nFam; i++) {
-                    for (int j = 0; j < nFam - i - 1; j++) {
-                        int aux;
-                        if (places[j] > places[j + 1]) {
-                            //exchange all arrays around places[]
-                            aux = id[j];
-                            id[j] = id[j + 1];
-                            id[j + 1] = aux;
-                            aux = places[j];
-                            places[j] = places[j + 1];
-                            places[j + 1] = aux;
-                            aux = respostaIdioma[j];
-                            respostaIdioma[j] = respostaIdioma[j + 1];
-                            respostaIdioma[j + 1] = aux;
-                            aux = room[j];
-                            room[j] = room[j + 1];
-                            room[j + 1] = aux;
-                            aux = telf[j];
-                            telf[j] = telf[j + 1];
-                            telf[j + 1] = aux;
-                        }
-                    }
-                }
-
+                sortPlaces();
                 //ask how many spots needed
                 resetForNextQuestion();
-                placesDisplay = getInput("Quantes places necessiteu?", PLACES_MIN, PLACES_MAX);
+                placesDisplay = getInput("Quantes places necessiteu?", PLACES_MIN, PLACES_MAX, DONT_LISTEN_FOR_EXIT);
 
                 printDataHeader();
                 for (int i = 0; i < nFam; i++) {
@@ -192,18 +159,7 @@ public class FamiliesAcollida {
 
             //ask if user wants to show family stats
             resetForNextQuestion();
-            while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("\nVols veure un resum estadistic de les dades? (si: 1/ no:0)");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    showStats = input.nextInt();
-                    if (showStats < NO || showStats > SI) {
-                        inRange = false;
-                    }
-                }
-                printErrorOnBadValue();
-                input.nextLine();
-            }
+            showStats = getInput("\nVols veure un resum estadistic de les dades? (si: 1/ no:0)", NO, SI, DONT_LISTEN_FOR_EXIT);
 
             //show stats if showStats input == 1
             if (showStats == 1) {
@@ -238,7 +194,7 @@ public class FamiliesAcollida {
         System.out.println("      (3) " + DORM);
     }
 
-    public int getInput(String inputText, int min, int max) {
+    public int getInput(String inputText, int min, int max, boolean listenForExit) {
         int curInput = 0;
         while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
             System.out.println(inputText);
@@ -247,8 +203,10 @@ public class FamiliesAcollida {
                 curInput = input.nextInt();
                 if (curInput < min || curInput > max) {
                     inRange = false;
-                    if (curInput == END_CURRENT) {
-                        exit = true;
+                    if (listenForExit) {
+                        if (curInput == END_CURRENT) {
+                            exit = true;
+                        }
                     }
                 }
             }
@@ -278,11 +236,38 @@ public class FamiliesAcollida {
         };
     }
 
-    public void printDataHeader(){
+    public void printDataHeader() {
         System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
     }
 
-    public void printFamilyData(){
+    public void printFamilyData() {
         System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + parlaIdioma + "\t\t\t\t\t" + allotjament + "\t\t" + telf[i]);
+    }
+
+    public void sortPlaces() {
+        //Bubble sort around places[i]
+        for (int i = 0; i < nFam; i++) {
+            for (int j = 0; j < nFam - i - 1; j++) {
+                int aux;
+                if (places[j] > places[j + 1]) {
+                    //exchange all arrays around places[]
+                    aux = id[j];
+                    id[j] = id[j + 1];
+                    id[j + 1] = aux;
+                    aux = places[j];
+                    places[j] = places[j + 1];
+                    places[j + 1] = aux;
+                    aux = respostaIdioma[j];
+                    respostaIdioma[j] = respostaIdioma[j + 1];
+                    respostaIdioma[j + 1] = aux;
+                    aux = room[j];
+                    room[j] = room[j + 1];
+                    room[j + 1] = aux;
+                    aux = telf[j];
+                    telf[j] = telf[j + 1];
+                    telf[j + 1] = aux;
+                }
+            }
+        }
     }
 }
