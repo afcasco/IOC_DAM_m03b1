@@ -89,12 +89,12 @@ public class FamiliesAcollida {
 
             //speaks ru/ukr input
             respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", NO, SI, LISTEN_FOR_EXIT);
-
             //reset for next question includes next question room type decoration
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
                 printRoomType();
             }
+
             //room type input
             room[nFam] = getInput("Introdueix una de les opcions:", ROOM_MIN, ROOM_MAX, LISTEN_FOR_EXIT);
             if (attempts < MAX_ATTEMPTS && !exit) {
@@ -110,7 +110,6 @@ public class FamiliesAcollida {
             //ask to continue input
             resetForNextQuestion();
             keepAskingInt = getInput("\nContinuar introduint dades? (si: 1/ no:0)", NO, SI, DONT_LISTEN_FOR_EXIT);
-
             //convert keepaskingINt to boolean value
             switchKeepAskingToBoolean();
 
