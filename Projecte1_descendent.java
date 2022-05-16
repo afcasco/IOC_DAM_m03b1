@@ -4,22 +4,20 @@ public class FamiliesAcollida {
 
     //declare constants
     private static final int MIN = 0;
-    private static final int MAX = 0;
+    private static final int MAX = 1;
     private static final int[] ID_RANGE = {10,999};
     private static final int[] PLACES_RANGE = {1,99};
     private static final int ROOM_MIN = 0;
     private static final int ROOM_MAX = 3;
     private static final int TELF_MIN = 111111111;
     private static final int TELF_MAX = 999999999;
-    private static final int SI = 1;
-    private static final int NO = 0;
     private static final int MAX_ATTEMPTS = 3;
     private static final String SHARED = "Habitaci compartida             ";
     private static final String SINGLE = "Habitaci                     ";
     private static final String HOME = "Habitatge sencer                 ";
     private static final String DORM = "Sala comunitria, local habilitat";
     private static final String PARLA_SI = "si";
-    private static final String PARLA_NO = "no";
+    private static final String PARLA_MIN = "no";
     private static final String ERROR_MSG = "Error, input de dades no valida";
     private static final int END_CURRENT = -1;
     private static final int MAX_FAMILIES = 10;
@@ -88,7 +86,7 @@ public class FamiliesAcollida {
             }
 
             //speaks ru/ukr input
-            respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", NO, SI, LISTEN_FOR_EXIT);
+            respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", MIN, MAX, LISTEN_FOR_EXIT);
             //reset for next question includes next question room type decoration
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
@@ -109,7 +107,7 @@ public class FamiliesAcollida {
 
             //ask to continue input
             resetForNextQuestion();
-            keepAskingInt = getInput("\nContinuar introduint dades? (si: 1/ no:0)", NO, SI, DONT_LISTEN_FOR_EXIT);
+            keepAskingInt = getInput("\nContinuar introduint dades? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
             //convert keepaskingINt to boolean value
             switchKeepAskingToBoolean();
 
@@ -129,7 +127,7 @@ public class FamiliesAcollida {
 
             //chose view stats input
             resetForNextQuestion();
-            queryPlaces = getInput("Vols consultar per numero de places (si: 1/ no:0)?", NO, SI, DONT_LISTEN_FOR_EXIT);
+            queryPlaces = getInput("Vols consultar per numero de places (si: 1/ no:0)?", MIN, MAX, DONT_LISTEN_FOR_EXIT);
 
             //Show stats if showStats input was 1
             if (queryPlaces == 1) {
@@ -149,7 +147,7 @@ public class FamiliesAcollida {
 
             //ask if user wants to show family stats
             resetForNextQuestion();
-            showStats = getInput("\nVols veure un resum estadistic de les dades? (si: 1/ no:0)", NO, SI, DONT_LISTEN_FOR_EXIT);
+            showStats = getInput("\nVols veure un resum estadistic de les dades? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
 
             //show stats if showStats input == 1
             if (showStats == 1) {
@@ -209,7 +207,7 @@ public class FamiliesAcollida {
     public void switchIntAnswerToString() {
         if (respostaIdioma[i] == 1) {
             parlaIdioma = PARLA_SI;
-        } else parlaIdioma = PARLA_NO;
+        } else parlaIdioma = PARLA_MIN;
         switch (room[i]) {
         case 0:
             allotjament = SHARED;
