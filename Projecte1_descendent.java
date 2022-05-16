@@ -17,7 +17,7 @@ public class FamiliesAcollida {
     private static final String HOME = "Habitatge sencer                 ";
     private static final String DORM = "Sala comunitria, local habilitat";
     private static final String PARLA_SI = "si";
-    private static final String PARLA_MIN = "no";
+    private static final String PARLA_NO = "no";
     private static final String ERROR_MSG = "Error, input de dades no valida";
     private static final int END_CURRENT = -1;
     private static final int MAX_FAMILIES = 10;
@@ -207,7 +207,7 @@ public class FamiliesAcollida {
     public void switchIntAnswerToString() {
         if (respostaIdioma[i] == 1) {
             parlaIdioma = PARLA_SI;
-        } else parlaIdioma = PARLA_MIN;
+        } else parlaIdioma = PARLA_NO;
         switch (room[i]) {
         case 0:
             allotjament = SHARED;
