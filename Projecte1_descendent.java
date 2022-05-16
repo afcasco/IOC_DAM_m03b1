@@ -3,10 +3,10 @@ import java.util.Scanner;
 public class FamiliesAcollida {
 
     //declare constants
-    private static final int ID_MIN = 10;
-    private static final int ID_MAX = 999;
-    private static final int PLACES_MIN = 1;
-    private static final int PLACES_MAX = 99;
+    private static final int MIN = 0;
+    private static final int MAX = 0;
+    private static final int[] ID_RANGE = {10,999};
+    private static final int[] PLACES_RANGE = {1,99};
     private static final int ROOM_MIN = 0;
     private static final int ROOM_MAX = 3;
     private static final int TELF_MIN = 111111111;
@@ -76,13 +76,13 @@ public class FamiliesAcollida {
             attempts = 0;
             inRange = false;
 
-            id[nFam] = getInput("Introdueix id familia (10-999)", ID_MIN, ID_MAX, LISTEN_FOR_EXIT);
+            id[nFam] = getInput("Introdueix id familia (10-999)", ID_RANGE[MIN], ID_RANGE[MAX], LISTEN_FOR_EXIT);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
 
             //spots input
-            places[nFam] = getInput("Introdueix numero de places disponible (1-99", PLACES_MIN, PLACES_MAX, LISTEN_FOR_EXIT);
+            places[nFam] = getInput("Introdueix numero de places disponible (1-99", PLACES_RANGE[MIN], PLACES_RANGE[MAX], LISTEN_FOR_EXIT);
             if (attempts < MAX_ATTEMPTS && !exit) {
                 resetForNextQuestion();
             }
@@ -136,7 +136,7 @@ public class FamiliesAcollida {
                 sortPlaces();
                 //ask how many spots needed
                 resetForNextQuestion();
-                placesDisplay = getInput("Quantes places necessiteu?", PLACES_MIN, PLACES_MAX, DONT_LISTEN_FOR_EXIT);
+                placesDisplay = getInput("Quantes places necessiteu?", PLACES_RANGE[MIN], PLACES_RANGE[MAX], DONT_LISTEN_FOR_EXIT);
 
                 printDataHeader();
                 for (int i = 0; i < nFam; i++) {
@@ -278,6 +278,5 @@ public class FamiliesAcollida {
         if (attempts == MAX_ATTEMPTS || keepAskingInt == 0) {
             keepAsking = false;
         }
-
     }
 }
