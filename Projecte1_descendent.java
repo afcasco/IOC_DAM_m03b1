@@ -40,6 +40,8 @@ public class FamiliesAcollida {
     boolean exit;
     String parlaIdioma;
     int i = 0;
+    int keepAskingInt;
+    boolean keepAsking;
 
     public static void main(String[] args) {
 
@@ -56,13 +58,11 @@ public class FamiliesAcollida {
         System.out.println("* Si t'equivoques introdueix -1 per cancelar la entrada manualment        *");
         System.out.println("***************************************************************************\n");
 
-        int keepAskingInt;
         int queryPlaces = 0;
         int placesDisplay = 0;
         int showStats = 0;
         int totalPlaces = 0;
         int totalIdioma = 0;
-        boolean keepAsking;
 
         do {
             exit = false;
@@ -105,23 +105,14 @@ public class FamiliesAcollida {
             telf[nFam] = getInput("Introdueix un telefon de contacte:", TELF_MIN, TELF_MAX, LISTEN_FOR_EXIT);
 
             //3 failed input attempts error msg
-            if (attempts == MAX_ATTEMPTS) {
-                System.out.println("------------------------------------------------------");
-                System.out.println("Has introduit alguna dada malament mes de 3 vegades...");
-                //Current input canceled by user with -1 message
-            } else if (exit) {
-                System.out.println("------------------------------------------------------");
-                System.out.println("\nEntrada actual cancelada per operador");
-            } else {
-                nFam++;
-            }
+            errorMessageHandling();
 
             //ask to continue input
             resetForNextQuestion();
             keepAskingInt = getInput("\nContinuar introduint dades? (si: 1/ no:0)", NO, SI, DONT_LISTEN_FOR_EXIT);
-            if (attempts == MAX_ATTEMPTS || keepAskingInt == 0) {
-                keepAsking = false;
-            }
+
+            //convert keepaskingINt to boolean value
+            switchKeepAskingToBoolean();
 
         } while (keepAsking);
 
@@ -269,5 +260,25 @@ public class FamiliesAcollida {
                 }
             }
         }
+    }
+
+    public void errorMessageHandling() {
+        if (attempts == MAX_ATTEMPTS) {
+            System.out.println("------------------------------------------------------");
+            System.out.println("Has introduit alguna dada malament mes de 3 vegades...");
+            //Current input canceled by user with -1 message
+        } else if (exit) {
+            System.out.println("------------------------------------------------------");
+            System.out.println("\nEntrada actual cancelada per operador");
+        } else {
+            nFam++;
+        }
+    }
+
+    public void switchKeepAskingToBoolean() {
+        if (attempts == MAX_ATTEMPTS || keepAskingInt == 0) {
+            keepAsking = false;
+        }
+
     }
 }
