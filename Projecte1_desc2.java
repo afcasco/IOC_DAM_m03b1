@@ -32,7 +32,7 @@ public class FamiliesAcollida {
     int[] room = new int[MAX_FAMILIES];
     int[] telNumber = new int[MAX_FAMILIES];
     String allotjament;
-    int nFam = 0;
+    int numberOfFamilies = 0;
     int attempts;
     boolean inRange;
     boolean exit = false;
@@ -67,30 +67,30 @@ public class FamiliesAcollida {
             inRange = false;
 
             //id input
-            id[nFam] = getInput("Introdueix id familia (10-999)", ID_RANGE[MIN], ID_RANGE[MAX], LISTEN_FOR_EXIT);
+            id[numberOfFamilies] = getInput("Introdueix id familia (10-999)", ID_RANGE[MIN], ID_RANGE[MAX], LISTEN_FOR_EXIT);
 
             //spots input
             if (attempts != MAX_ATTEMPTS && !exit) {
-                places[nFam] = getInput("Introdueix numero de places disponible (1-99", PLACES_RANGE[MIN], PLACES_RANGE[MAX], LISTEN_FOR_EXIT);
+                places[numberOfFamilies] = getInput("Introdueix numero de places disponible (1-99", PLACES_RANGE[MIN], PLACES_RANGE[MAX], LISTEN_FOR_EXIT);
             }
 
             //speaks ru/ukr input
             if (attempts != MAX_ATTEMPTS && !exit) {
-                respostaIdioma[nFam] = getInput("Parla rus o ucraines (si: 1/ no:0)", MIN, MAX, LISTEN_FOR_EXIT);
+                respostaIdioma[numberOfFamilies] = getInput("Parla rus o ucraines (si: 1/ no:0)", MIN, MAX, LISTEN_FOR_EXIT);
             }
 
             //room type input
             if (attempts != MAX_ATTEMPTS && !exit) {
                 printRoomType();
-                room[nFam] = getInput("", ROOM_RANGE[MIN], ROOM_RANGE[MAX], LISTEN_FOR_EXIT);
+                room[numberOfFamilies] = getInput("", ROOM_RANGE[MIN], ROOM_RANGE[MAX], LISTEN_FOR_EXIT);
             }
 
             //mobile # input
             if (attempts != MAX_ATTEMPTS && !exit) {
-                telNumber[nFam] = getInput("Introdueix un telefon de contacte:", TEL_NUMBER_RANGE[MIN], TEL_NUMBER_RANGE[MAX], LISTEN_FOR_EXIT);
+                telNumber[numberOfFamilies] = getInput("Introdueix un telefon de contacte:", TEL_NUMBER_RANGE[MIN], TEL_NUMBER_RANGE[MAX], LISTEN_FOR_EXIT);
             }
 
-            //Print why current input was cancelled, or add 1 to nFam if it wasn't
+            //Print why current input was cancelled, or add 1 to numberOfFamilies if it wasn't
             errorMessageHandler();
 
             //ask to continue input
@@ -99,10 +99,10 @@ public class FamiliesAcollida {
         } while (continueAskingForFamilies != 0);
 
         //print total number of families
-        System.out.println("\nS'han introduit les dades de: " + nFam + " families");
+        System.out.println("\nS'han introduit les dades de: " + numberOfFamilies + " families");
 
         //if families greater than 0
-        if (nFam > 0) {
+        if (numberOfFamilies > 0) {
             printFamilyData();
 
             placesDisplay = getInput("\nVols consultar per numero de places? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
@@ -160,13 +160,13 @@ public class FamiliesAcollida {
         } else if (exit) {
             System.out.println("Current family input cancelled by operator with -1");
         } else {
-            nFam++;
+            numberOfFamilies++;
         }
     }
 
     public void printFamilyData(){
         System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
-        for(int i=0;i<nFam;i++){
+        for(int i=0;i<numberOfFamilies;i++){
             System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + respostaIdioma[i] + "\t\t\t\t\t" + room[i] + "\t\t" + telNumber[i]);
         }
     }
