@@ -107,7 +107,7 @@ public class FamiliesAcollida {
             }
 
             //Print why current input was cancelled, or add 1 to nFam if it wasn't
-            errorMessageHandling();
+            errorMessageHandler();
 
             //ask to continue input
             continueAskingForFamilies = getInput("\nContinuar introduint dades? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
@@ -131,7 +131,7 @@ public class FamiliesAcollida {
                 
 
                 //ordenar places
-                //mostrar 
+                //mostrar nomes entrades amb places demanades
             }
         }
     }
@@ -169,7 +169,7 @@ public class FamiliesAcollida {
         System.out.println("      (3) " + Accomodation.DORM);
     }
 
-    public void errorMessageHandling(){
+    public void errorMessageHandler(){
         if(attempts==MAX_ATTEMPTS&&!exit){
             System.out.println("reached max attemts, canceling current family input...");
 
