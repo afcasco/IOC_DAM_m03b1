@@ -47,7 +47,7 @@ public class FamiliesAcollida {
     int[] places = new int[MAX_FAMILIES];
     int[] respostaIdioma = new int[MAX_FAMILIES];
     int[] room = new int[MAX_FAMILIES];
-    int[] telf = new int[MAX_FAMILIES];
+    int[] telNumber = new int[MAX_FAMILIES];
     String allotjament;
     int nFam = 0;
     int attempts;
@@ -104,7 +104,7 @@ public class FamiliesAcollida {
 
             //mobile # input
             if (attempts != MAX_ATTEMPTS && !exit) {
-                telf[nFam] = getInput("Introdueix un telefon de contacte:", TEL_NUMBER_RANGE[MIN], TEL_NUMBER_RANGE[MAX], LISTEN_FOR_EXIT);
+                telNumber[nFam] = getInput("Introdueix un telefon de contacte:", TEL_NUMBER_RANGE[MIN], TEL_NUMBER_RANGE[MAX], LISTEN_FOR_EXIT);
             }
 
             //Print why current input was cancelled, or add 1 to nFam if it wasn't
@@ -126,7 +126,7 @@ public class FamiliesAcollida {
 
     public int getInput(String inputText, int min, int max, boolean listenForExit) {
         exit = false;
-        int curInput = 0;
+        int inputValue = 0;
         attempts = 0;
         inRange = false;
         Scanner input = new Scanner(System.in);
@@ -134,10 +134,10 @@ public class FamiliesAcollida {
         while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
             inRange = input.hasNextInt();
             if (inRange) {
-                curInput = input.nextInt();
-                if (curInput < min || curInput > max) {
+                inputValue = input.nextInt();
+                if (inputValue < min || inputValue > max) {
                     inRange = false;
-                    if (curInput == -1) exit = true;
+                    if (inputValue == -1) exit = true;
                 }
             }
             if (!inRange&&!exit) {
@@ -146,7 +146,7 @@ public class FamiliesAcollida {
             }
             input.nextLine();
         }
-        return curInput;
+        return inputValue;
     }
 
     public void printRoomType() {
@@ -171,7 +171,7 @@ public class FamiliesAcollida {
     public void printFamilyData(){
         System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
         for(int i=0;i<nFam;i++){
-            System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + respostaIdioma[i] + "\t\t\t\t\t" + room[i] + "\t\t" + telf[i]);
+            System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + respostaIdioma[i] + "\t\t\t\t\t" + room[i] + "\t\t" + telNumber[i]);
         }
     }
 }
