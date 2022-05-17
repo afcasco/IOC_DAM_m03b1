@@ -2,22 +2,10 @@ import java.util.Scanner;
 
 public class Projecte1 {
 
-    public static final int[] ID_RANGE = new int[] {
-        10,
-        999
-    };
-    public static final int[] PLACES_RANGE = new int[] {
-        1,
-        99
-    };
-    public static final int[] ROOM_RANGE = new int[] {
-        0,
-        3
-    };
-    public static final int[] TELF_RANGE = new int[] {
-        111111111,
-        999999999
-    };
+    public static final int[] ID_RANGE = new int[] {10,999};
+    public static final int[] PLACES_RANGE = new int[] {1,99};
+    public static final int[] ROOM_RANGE = new int[] {0,3};
+    public static final int[] TELF_RANGE = new int[] {111111111,999999999};
     private static final int MIN = 0;
     private static final int MAX = 1;
     private static final int MAX_ATTEMPTS = 3;
