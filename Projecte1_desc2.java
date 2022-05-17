@@ -35,7 +35,7 @@ public class FamiliesAcollida {
     boolean exit = false;
     String parlaIdioma;
     int i = 0;
-    int keepAskingInt;
+    int continueAskingForFamilies;
 
     public static void main(String[] args) {
 
@@ -91,9 +91,9 @@ public class FamiliesAcollida {
             errorMessageHandling();
 
             //ask to continue input
-            keepAskingInt = getInput("\nContinuar introduint dades? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
+            continueAskingForFamilies = getInput("\nContinuar introduint dades? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
 
-        } while (keepAskingInt != 0);
+        } while (continueAskingForFamilies != 0);
 
         //print total number of families
         System.out.println("\nS'han introduit les dades de: " + nFam + " families");
