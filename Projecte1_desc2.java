@@ -19,26 +19,10 @@ public class FamiliesAcollida {
 
     private enum Accomodation {
 
-        SHARED {
-            public String toString() {
-                return "HHabitaci compartida             ";
-            }
-        },
-        SINGLE {
-            public String toString() {
-                return "Habitacio                     ";
-            }
-        },
-        HOME {
-            public String toString() {
-                return "Habitatge sencer                 ";
-            }
-        },
-        DORM {
-            public String toString() {
-                return "Sala comunitria, local habilitat";
-            }
-        },
+        SHARED {public String toString() {return "HHabitaci compartida             ";}},
+        SINGLE {public String toString() {return "Habitacio                     ";}},
+        HOME {public String toString() {return "Habitatge sencer                 ";}},
+        DORM {public String toString() {return "Sala comunitria, local habilitat";}},
     }
 
     //declare arrays to store data (max 10 families)
