@@ -104,37 +104,12 @@ public class FamiliesAcollida {
             if (placesDisplay == 1) {
                 
                 queryPlaces = getInput("\nQuantes places necessiteu? (1-99)", PLACES_RANGE[MIN], PLACES_RANGE[MAX], DONT_LISTEN_FOR_EXIT);
-                System.out.println("volem ENTRADES amb " + queryPlaces + " o mes");
 
                 //ordenar places
                 if (queryPlaces == 1) {
                     //Bubble sort around places[i]
-                    for (int i = 0; i < numberOfFamilies; i++) {
-                        for (int j = 0; j < numberOfFamilies - i - 1; j++) {
-                            int aux;
-                            if (familyData[j][ID] < familyData[j + 1][ID]) {
-                                //exchange all arrays around places[]
-                                aux = familyData[j][ID];
-                                familyData[j][ID] = familyData[j + 1][ID];
-                                familyData[j + 1][ID] = aux;
-                                aux = familyData[j][PLACES];
-                                familyData[j][PLACES] = familyData[j + 1][PLACES];
-                                familyData[j + 1][PLACES] = aux;
-                                aux = familyData[j][LANGUAGE];
-                                familyData[j][LANGUAGE] = familyData[j + 1][LANGUAGE];
-                                familyData[j + 1][LANGUAGE] = aux;
-                                aux = familyData[j][ROOM];
-                                familyData[j][ROOM] = familyData[j + 1][ROOM];
-                                familyData[j + 1][ROOM] = aux;
-                                aux = familyData[j][TELF];
-                                familyData[j][TELF] = familyData[j + 1][TELF];
-                                familyData[j + 1][TELF] = aux;
-                            }
-                        }
-                    }
-
-                    placesDisplay = getInput("How many spots do you need?", PLACES_RANGE[MIN], PLACES_RANGE[MAX], DONT_LISTEN_FOR_EXIT);
-
+                    sortByPlaces();
+                    //display sorted by places
                     System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
                     for (int i = 0; i < numberOfFamilies; i++) {
                         if (familyData[i][PLACES] >= placesDisplay) {
@@ -145,6 +120,11 @@ public class FamiliesAcollida {
                     }
                 }
             }
+
+
+            //show stats
+
+            //filter by type of accomodation
         }
     }
 
@@ -210,6 +190,32 @@ public class FamiliesAcollida {
             languageReturn = PARLA_NO;
         }
         return languageReturn;
+    }
+
+    public void sortByPlaces(){
+        for (int i = 0; i < numberOfFamilies; i++) {
+                        for (int j = 0; j < numberOfFamilies - i - 1; j++) {
+                            int aux;
+                            if (familyData[j][PLACES] > familyData[j + 1][PLACES]) {
+                                //exchange all arrays around places[]
+                                aux = familyData[j][ID];
+                                familyData[j][ID] = familyData[j + 1][ID];
+                                familyData[j + 1][ID] = aux;
+                                aux = familyData[j][PLACES];
+                                familyData[j][PLACES] = familyData[j + 1][PLACES];
+                                familyData[j + 1][PLACES] = aux;
+                                aux = familyData[j][LANGUAGE];
+                                familyData[j][LANGUAGE] = familyData[j + 1][LANGUAGE];
+                                familyData[j + 1][LANGUAGE] = aux;
+                                aux = familyData[j][ROOM];
+                                familyData[j][ROOM] = familyData[j + 1][ROOM];
+                                familyData[j + 1][ROOM] = aux;
+                                aux = familyData[j][TELF];
+                                familyData[j][TELF] = familyData[j + 1][TELF];
+                                familyData[j + 1][TELF] = aux;
+                            }
+                        }
+                    }
     }
 
     //change int value to string literal
