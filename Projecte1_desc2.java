@@ -78,7 +78,8 @@ public class FamiliesAcollida {
 
             //room type input
             if (attempts != MAX_ATTEMPTS && !exit) {
-                room[nFam] = getInput("Introdueix una de les opcions:", ROOM_RANGE[MIN], ROOM_RANGE[MAX], LISTEN_FOR_EXIT);
+                printRoomType();
+                room[nFam] = getInput("", ROOM_RANGE[MIN], ROOM_RANGE[MAX], LISTEN_FOR_EXIT);
             }
 
             //mobile # input
@@ -126,6 +127,14 @@ public class FamiliesAcollida {
             input.nextLine();
         }
         return curInput;
+    }
+
+    public void printRoomType() {
+        System.out.println("De quin tipus d'allotjament es tracta?:");
+        System.out.println("      (0) " + SHARED);
+        System.out.println("      (1) " + SINGLE);
+        System.out.println("      (2) " + HOME);
+        System.out.println("      (3) " + DORM);
     }
 
     public void errorMessageHandling(){
