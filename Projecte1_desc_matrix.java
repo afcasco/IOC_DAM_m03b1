@@ -123,6 +123,17 @@ public class FamiliesAcollida {
 
 
             //show stats
+            showStats = getInput("\nVols veure un resum estadistic de les dades? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
+            if (showStats == 1) {
+                for (int i = 0; i < numberOfFamilies; i++) {
+                    totalPlaces += familyData[i][PLACES];
+                    totalIdioma += familyData[i][LANGUAGE];
+                }
+                System.out.println("\nNumero de families que acullen: " + numberOfFamilies);
+                System.out.println("Numero de places totals: " + totalPlaces);
+                System.out.println("Numero de families que parlen rus/ucraines: " + totalIdioma);
+
+            }
 
             //filter by type of accomodation
         }
