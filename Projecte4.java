@@ -1,436 +1,90 @@
-import java.util.Scanner;
+package toni.ioc.exercicis;
 
-public class Projecte1 {
+public class E14_HidalgoS {
 
-    public static final int[] ID_RANGE = new int[] {10,999};
-    public static final int[] PLACES_RANGE = new int[] {1,99};
-    public static final int[] ROOM_RANGE = new int[] {0,3};
-    public static final int[] TELF_RANGE = new int[] {111111111,999999999};
-    private static final int MIN = 0;
-    private static final int MAX = 1;
-    private static final int MAX_ATTEMPTS = 3;
-    private static final String SHARED = "Habitacio compartida             ";
-    private static final String SINGLE = "Habitacio                        ";
-    private static final String HOME = "Habitatge sencer                 ";
-    private static final String DORM = "Sala comunitaria, local habilitat";
-    private static final String PARLA_SI = "si";
-    private static final String PARLA_NO = "no";
-    private static final String PRINT_RESULTS_HEADER = "Id\tplaces\trus/ucraines\ttipus\t\t\t\t\ttelefon";
-    private static final String INVALID_INPUT_ERROR_MSG = "Error, input de dades no valida";
-    private static final int END_CURRENT = -1;
-    private static final int MAX_FAMILIES = 10;
-    private static final int ID = 0;
-    private static final int PLACES = 1;
-    private static final int LANGUAGE = 2;
-    private static final int ROOM = 3;
-    private static final int TELF = 4;
-    /*  private static final String MENU = """
-              ****************************************************************************
-                                  ENTRADA DE FAMILIES D'ACOLLIDA.
-              ****************************************************************************
-                                                      
-              El sistema no acceptara cap dada fora dels rangs demanats
-              Introduir la mateixa dada erroniament 3 vegades cancelara l'entrada actual
-              Si t'equivoques introdueix -1 per cancelar la entrada manualment
-                                              
-              ****************************************************************************
-              """;*/
+	public static final int HOME = 0; // constants per cridar els dos sexes
+	public static final int DONA = 1;
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        //Show how-to input data text
-        //System.out.println(MENU);
+		int[][] dorsal_sexe_edat_temps = { { 3457, 1, 51, 52 }, { 3467, 1, 32, 41 }, { 3568, 0, 14, 57 },
+				{ 3570, 0, 12, 63 }, { 3571, 1, 45, 63 }, { 3572, 0, 17, 46 }, { 3573, 0, 12, 44 }, { 3574, 0, 30, 42 },
+				{ 3575, 1, 24, 77 }, { 3576, 0, 57, 48 } };
 
-        Scanner input = new Scanner(System.in);
-        int attempts;
-        int keepAskingInt;
-        int nFam = 0;
-        int queryPlaces = 0;
-        int placesDisplay = 0;
-        int showStats = 0;
-        int totalPlaces = 0;
-        int totalIdioma = 0;
-        int orderByType;
-        int type;
-        String parlaIdioma;
-        String allotjament;
-        boolean inRange;
-        boolean keepAsking;
-        boolean exit;
+		int marca_min = 0;// var per buscar record	
+		int guanya = 0;// per els guanyadors 
+		
+		
 
-        //declare arrays to store data (max 10 families)
-        int[][] familyData = new int[MAX_FAMILIES][5];
+		System.out.println("======0000000000000000=======");
+		System.out.println("DORSAL" + "\t" + "SEXE" + "\t" + "EDAT" + "\t" + " TEMPS");
+		System.out.println("======0000000000000000=======");
+		System.out.println();
 
+		for (int i = 0; i < 10; i++) { // recorregut vertical
+			for (int j = 0; j < 4; j++) // recorregut horitzontal
 
-        do {
-            exit = false;
-            keepAsking = true;
-            keepAskingInt = 0;
-            attempts = 0;
-            inRange = false;
+				System.out.print(dorsal_sexe_edat_temps[i][j] + "\t" + "|");
+			System.out.println();
+		}
+		System.out.println();
+		System.out.println("==========");
+		System.out.println("|Home = 0|");
+		System.out.println("|Dona = 1|");
+		System.out.println("==========");
+		System.out.println();
+		System.out.println();
+		System.out.println("Guanyador Categoria Home");
+		System.out.println("======0000000000000000=======");
 
-            //family id input
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix id familia (10-999):");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    familyData[nFam][ID] = input.nextInt();
-                    if ((familyData[nFam][ID]) < ID_RANGE[MIN] || (familyData[nFam][ID]) > ID_RANGE[MAX]) {
-                        inRange = false;
-                        if (familyData[nFam][ID] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
+		for (int i = 0; i < dorsal_sexe_edat_temps.length; i++) {
 
-            //how many spots input
-            if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
-            }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix numero de places disponible (1-99):");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    familyData[nFam][PLACES] = input.nextInt();
-                    if (familyData[nFam][PLACES] < PLACES_RANGE[MIN] || familyData[nFam][PLACES] > PLACES_RANGE[MAX]) {
-                        inRange = false;
-                        if (familyData[nFam][PLACES] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
+			if (dorsal_sexe_edat_temps[i][1] == HOME) {
+				if (marca_min == 0) {
+					marca_min = dorsal_sexe_edat_temps[i][3]; // per treure a la llum la marca més petita
 
-            //speaks ru/ukr input
-            if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
-            }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Parla rus o ucraines? (si: 1/ no:0):");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    familyData[nFam][LANGUAGE] = input.nextInt();
-                    if (familyData[nFam][LANGUAGE] < MIN || familyData[nFam][LANGUAGE] > MAX) {
-                        inRange = false;
-                        if (familyData[nFam][LANGUAGE] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
+					marca_min = dorsal_sexe_edat_temps[i][3]; // torna la var en el que volem; minuts
+					guanya = i; // torna la variable ; dorsal
 
-            //room type input and question decoration
-            if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
-                System.out.println("De quin tipus d'allotjament es tracta?:");
-                System.out.println("      (0) " + SHARED);
-                System.out.println("      (1) " + SINGLE);
-                System.out.println("      (2) " + HOME);
-                System.out.println("      (3) " + DORM);
-            }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix una de les opcions:");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    familyData[nFam][ROOM] = input.nextInt();
-                    if (familyData[nFam][ROOM] < ROOM_RANGE[MIN] || familyData[nFam][ROOM] > ROOM_RANGE[MAX]) {
-                        inRange = false;
-                        if (familyData[nFam][ROOM] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
+				} else {
+					if (dorsal_sexe_edat_temps[i][3] < marca_min) {
+						marca_min = dorsal_sexe_edat_temps[i][3];
+						guanya = i;
+					}
 
-            //mobile # input
-            if (attempts < MAX_ATTEMPTS && !exit) {
-                inRange = false;
-                attempts = 0;
-            }
-            while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
-                System.out.println("Introdueix un telefon de contacte:");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    familyData[nFam][TELF] = input.nextInt();
-                    if (familyData[nFam][TELF] < TELF_RANGE[MIN] || familyData[nFam][TELF] > TELF_RANGE[MAX]) {
-                        inRange = false;
-                        if (familyData[nFam][TELF] == END_CURRENT) {
-                            exit = true;
-                        }
-                    }
-                }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
+				}
+			}
+		}
 
-            //3 failed input attempts error msg
-            if (attempts == MAX_ATTEMPTS) {
-                System.out.println("------------------------------------------------------");
-                System.out.println("Has introduit alguna dada malament mes de 3 vegades...");
-                //Current input canceled by user with -1 message
-            } else if (exit) {
-                System.out.println("------------------------------------------------------");
-                System.out.println("\nEntrada actual cancelada per operador");
-            } else {
-                nFam++;
-            }
+		System.out.println("El guanyador categoria masculina es el dorsal; " + dorsal_sexe_edat_temps[guanya][0]
+				+ "amb una marca de " + marca_min); // imprimim dorsal
 
-            //ask to continue input
-            inRange = false;
-            attempts = 0;
-            while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("\nContinuar introduint dades? (si: 1/ no:0)");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    keepAskingInt = input.nextInt();
-                    if (keepAskingInt < MIN || keepAskingInt > MAX) {
-                        inRange = false;
-                    }
-                }
-                if (!inRange) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
-            if (attempts == MAX_ATTEMPTS || keepAskingInt == 0) {
-                keepAsking = false;
-            }
+		System.out.println();
+		System.out.println();
 
-        } while (keepAsking);
+		for (int i = 0; i < dorsal_sexe_edat_temps.length; i++) {
 
-        //print total number of families
-        System.out.println("\nS'han introduit les dades de: " + nFam + " families");
+			if (dorsal_sexe_edat_temps[i][1] == DONA) {
 
-        //if families greater than 0
-        if (nFam != 0) {
-            //Print all families data
-            System.out.println(PRINT_RESULTS_HEADER);
-            for (int i = 0; i < nFam; i++) {
-                parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
-                allotjament = switchRoomType(familyData[i][ROOM]);
-                System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
-            }
+				if (dorsal_sexe_edat_temps[i][3] < marca_min)
+					;
 
-            //choose view stats input
-            inRange = false;
-            attempts = 0;
-            while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("\nVols consultar per numero de places?(si: 1/ no:0)");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    queryPlaces = input.nextInt();
-                    if (queryPlaces < MIN || queryPlaces > MAX) {
-                        inRange = false;
-                    }
-                }
-                if (!inRange) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
+				marca_min = dorsal_sexe_edat_temps[i][3];
+				guanya = dorsal_sexe_edat_temps[i][0];
 
-            //Show stats if showStats input was 1
-            if (queryPlaces == 1) {
-                //Bubble sort around places[i]
-                for (int i = 0; i < nFam; i++) {
-                    for (int j = 0; j < nFam - i - 1; j++) {
-                        int aux;
-                        if (familyData[j][PLACES] > familyData[j + 1][PLACES]) {
-                            //exchange all arrays around places[]
-                            aux = familyData[j][ID];
-                            familyData[j][ID] = familyData[j + 1][ID];
-                            familyData[j + 1][ID] = aux;
-                            aux = familyData[j][PLACES];
-                            familyData[j][PLACES] = familyData[j + 1][PLACES];
-                            familyData[j + 1][PLACES] = aux;
-                            aux = familyData[j][LANGUAGE];
-                            familyData[j][LANGUAGE] = familyData[j + 1][LANGUAGE];
-                            familyData[j + 1][LANGUAGE] = aux;
-                            aux = familyData[j][ROOM];
-                            familyData[j][ROOM] = familyData[j + 1][ROOM];
-                            familyData[j + 1][ROOM] = aux;
-                            aux = familyData[j][TELF];
-                            familyData[j][TELF] = familyData[j + 1][TELF];
-                            familyData[j + 1][TELF] = aux;
-                        }
-                    }
-                }
+			} else {
+				if (dorsal_sexe_edat_temps[i][3] < marca_min) {
+					marca_min = dorsal_sexe_edat_temps[i][3];
+					guanya = i;
+				}
 
-                //ask how many spots needed
-                inRange = false;
-                attempts = 0;
-                while (!inRange && attempts < MAX_ATTEMPTS) {
-                    System.out.println("\nQuantes places necessiteu?");
-                    inRange = input.hasNextInt();
-                    if (inRange) {
-                        placesDisplay = input.nextInt();
-                        if (placesDisplay < PLACES_RANGE[MIN] || placesDisplay > PLACES_RANGE[MAX]) {
-                            inRange = false;
-                        }
-                    }
-                    if (!inRange) {
-                        System.out.println(INVALID_INPUT_ERROR_MSG);
-                        attempts++;
-                    }
-                    input.nextLine();
-                }
+			}
+		}
+		
+		System.out.println("Guanyador Categoria Dona");
+		System.out.println("======0000000000000000=======");
+		System.out.println("El guanyador categoria femenina es la dorsal; " + dorsal_sexe_edat_temps[guanya][0] + 
+				" amb una marca de " + marca_min);
 
-                System.out.println(PRINT_RESULTS_HEADER);
-                for (int i = 0; i < nFam; i++) {
-                    if (familyData[i][PLACES] >= placesDisplay) {
-                        parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
-                        allotjament = switchRoomType(familyData[i][ROOM]);
-                        System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
-                    }
-                }
-            }
-
-            //ask if user wants to show family stats
-            inRange = false;
-            attempts = 0;
-            while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("\nVols veure un resum estadistic de les dades? (si: 1/ no:0)");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    showStats = input.nextInt();
-                    if (showStats < MIN || showStats > MAX) {
-                        inRange = false;
-                    }
-                }
-                if (!inRange) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-                input.nextLine();
-            }
-
-            //show stats if showStats input == 1
-            if (showStats == 1) {
-                for (int i = 0; i < nFam; i++) {
-                    totalPlaces += familyData[i][PLACES];
-                    totalIdioma += familyData[i][LANGUAGE];
-                }
-                System.out.println("\nNumero de families que acullen: " + nFam);
-                System.out.println("Numero de places totals: " + totalPlaces);
-                System.out.println("Numero de families que parlen rus/ucraines: " + totalIdioma);
-
-            }
-            //Aks if user wants to order by type of accommodation
-            inRange = false;
-            attempts = 0;
-            while (!inRange && attempts < MAX_ATTEMPTS) {
-                System.out.println("\nVols consultar per tipus d'allotjament? (si: 1/ no:0)");
-                inRange = input.hasNextInt();
-                if (inRange) {
-                    orderByType = input.nextInt();
-                    if ((orderByType < MIN) || (orderByType > MAX)) {
-                        System.out.println("Has d'introduir si: 1/ no:0");
-                        inRange = false;
-                        attempts++;
-                        input.nextLine();
-                    } else if (orderByType == MAX) {
-                        inRange = false;
-                        attempts = 0;
-                        input.nextLine();
-                        while (!inRange && attempts < MAX_ATTEMPTS) {
-                            System.out.println("Tipus d'allotjament?");
-                            System.out.println("      (0) " + SHARED);
-                            System.out.println("      (1) " + SINGLE);
-                            System.out.println("      (2) " + HOME);
-                            System.out.println("      (3) " + DORM);
-                            if (input.hasNextInt()) {
-                                type = input.nextInt();
-                                if ((type < ROOM_RANGE[MIN]) || (type > ROOM_RANGE[MAX])) {
-                                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                                    attempts++;
-                                    input.nextLine();
-                                } else {
-                                    allotjament = switchRoomType(type);
-                                    System.out.println("Dades de families que ofereixen " + allotjament);
-                                    System.out.println(PRINT_RESULTS_HEADER);
-                                    for (int i = 0; i < nFam; i++) {
-                                        if (familyData[i][ROOM] == type) {
-                                            parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
-                                            System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
-                                        }
-                                    }
-                                    attempts = 0;
-                                    inRange = true;
-                                    input.nextLine();
-                                }
-                            } else {
-                                input.nextLine();
-                                System.out.println(INVALID_INPUT_ERROR_MSG);
-                                attempts++;
-                            }
-                        }
-                    }
-                } else {
-                    input.nextLine();
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
-            }
-
-        }
-    }
-
-    //small test function to change int value input to string
-    public static String switchIdioma(int languageSelection) {
-        String languageReturn;
-        if (languageSelection == 1) {
-            languageReturn = PARLA_SI;
-        } else {
-            languageReturn = PARLA_NO;
-        }
-        return languageReturn;
-    }
-
-    //small test function to change int value input to string
-    public static String switchRoomType(int roomType) {
-        String returnRoom;
-        switch (roomType) {
-            case 0:
-                returnRoom = SHARED;
-                break;
-            case 1:
-                returnRoom = SINGLE;
-                break;
-            case 2:
-                returnRoom = HOME;
-                break;
-            default:
-                returnRoom = DORM;
-        };
-        return returnRoom;
-    }
+	}
 }
