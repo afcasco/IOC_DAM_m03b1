@@ -102,9 +102,7 @@ public class FamiliesAcollida {
 
             placesDisplay = getInput("\nVols consultar per numero de places? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
             if (placesDisplay == 1) {
-                //volem ordenar per places
-                System.out.println("volem ordenar por places");
-                //quantes places minimes mostrar
+                
                 queryPlaces = getInput("\nQuantes places necessiteu? (1-99)", PLACES_RANGE[MIN], PLACES_RANGE[MAX], DONT_LISTEN_FOR_EXIT);
                 System.out.println("volem ENTRADES amb " + queryPlaces + " o mes");
 
