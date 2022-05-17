@@ -10,10 +10,6 @@ public class FamiliesAcollida {
     private static final int[] ROOM_RANGE = {0,3};
     private static final int[] TEL_NUMBER_RANGE = {111111111,999999999};
     private static final int MAX_ATTEMPTS = 3;
-    private static final String SHARED = "Habitaci compartida             ";
-    private static final String SINGLE = "Habitaci                     ";
-    private static final String HOME = "Habitatge sencer                 ";
-    private static final String DORM = "Sala comunitria, local habilitat";
     private static final String PARLA_SI = "si";
     private static final String PARLA_NO = "no";
     private static final String BAD_VALUE_INPUT = "Error, input de dades no valida";
@@ -21,6 +17,30 @@ public class FamiliesAcollida {
     private static final int MAX_FAMILIES = 10;
     private static final boolean LISTEN_FOR_EXIT = true;
     private static final boolean DONT_LISTEN_FOR_EXIT = false;
+
+    private enum Accomodation {
+
+        SHARED {
+            public String toString() {
+                return "HHabitaci compartida             ";
+            }
+        },
+        SINGLE {
+            public String toString() {
+                return "Habitacio                     ";
+            }
+        },
+        HOME {
+            public String toString() {
+                return "Habitatge sencer                 ";
+            }
+        },
+        DORM {
+            public String toString() {
+                return "Sala comunitria, local habilitat";
+            }
+        },
+    }
 
     //declare arrays to store data (max 10 families)
     int[] id = new int[MAX_FAMILIES];
@@ -131,10 +151,10 @@ public class FamiliesAcollida {
 
     public void printRoomType() {
         System.out.println("De quin tipus d'allotjament es tracta?:");
-        System.out.println("      (0) " + SHARED);
-        System.out.println("      (1) " + SINGLE);
-        System.out.println("      (2) " + HOME);
-        System.out.println("      (3) " + DORM);
+        System.out.println("      (0) " + Accomodation.SHARED);
+        System.out.println("      (1) " + Accomodation.SINGLE);
+        System.out.println("      (2) " + Accomodation.HOME);
+        System.out.println("      (3) " + Accomodation.DORM);
     }
 
     public void errorMessageHandling(){
