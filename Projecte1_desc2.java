@@ -153,7 +153,5 @@ public class FamiliesAcollida {
         for(int i=0;i<nFam;i++){
             System.out.println(id[i] + "\t\t" + places[i] + "\t\t\t" + respostaIdioma[i] + "\t\t\t\t\t" + room[i] + "\t\t" + telf[i]);
         }
-
     }
-
 }
