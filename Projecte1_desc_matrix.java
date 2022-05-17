@@ -36,17 +36,17 @@ public class FamiliesAcollida {
     int attempts;
     boolean inRange;
     boolean exit = false;
-    String parlaIdioma;
+    String speaksRuOrUkr;
     int i = 0;
     int continueAskingForFamilies;
 
     public static void main(String[] args) {
 
         FamiliesAcollida programa = new FamiliesAcollida();
-        programa.inici();
+        programa.start();
     }
 
-    public void inici() {
+    public void start() {
 
         //Mostrem a l'usuari com s'han d'introduir les dades
         System.out.println("\n***************************************************************************");
@@ -138,9 +138,9 @@ public class FamiliesAcollida {
                     System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
                     for (int i = 0; i < numberOfFamilies; i++) {
                         if (familyData[i][PLACES] >= placesDisplay) {
-                            parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
+                            speaksRuOrUkr = switchIdioma(familyData[i][LANGUAGE]);
                             allotjament = switchRoomType(familyData[i][ROOM]);
-                            System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
+                            System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + speaksRuOrUkr + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
                         }
                     }
                 }
@@ -195,12 +195,13 @@ public class FamiliesAcollida {
     public void printFamilyData() {
         System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
         for (int i = 0; i < numberOfFamilies; i++) {
-            parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
+            speaksRuOrUkr = switchIdioma(familyData[i][LANGUAGE]);
             allotjament = switchRoomType(familyData[i][ROOM]);
-            System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
+            System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + speaksRuOrUkr + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
         }
     }
 
+    //change int value to string literal
     public static String switchIdioma(int languageSelection) {
         String languageReturn;
         if (languageSelection == 1) {
@@ -211,7 +212,7 @@ public class FamiliesAcollida {
         return languageReturn;
     }
 
-    //small test function to change int value input to string
+    //change int value to string literal
     public static String switchRoomType(int roomType) {
         String returnRoom;
         switch (roomType) {
