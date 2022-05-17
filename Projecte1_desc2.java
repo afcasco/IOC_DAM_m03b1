@@ -68,23 +68,19 @@ public class FamiliesAcollida {
 
             //id input
             id[numberOfFamilies] = getInput("Introdueix id familia (10-999)", ID_RANGE[MIN], ID_RANGE[MAX], LISTEN_FOR_EXIT);
-
             //spots input
             if (attempts != MAX_ATTEMPTS && !exit) {
                 places[numberOfFamilies] = getInput("Introdueix numero de places disponible (1-99", PLACES_RANGE[MIN], PLACES_RANGE[MAX], LISTEN_FOR_EXIT);
             }
-
             //speaks ru/ukr input
             if (attempts != MAX_ATTEMPTS && !exit) {
                 respostaIdioma[numberOfFamilies] = getInput("Parla rus o ucraines (si: 1/ no:0)", MIN, MAX, LISTEN_FOR_EXIT);
             }
-
             //room type input
             if (attempts != MAX_ATTEMPTS && !exit) {
                 printRoomType();
                 room[numberOfFamilies] = getInput("", ROOM_RANGE[MIN], ROOM_RANGE[MAX], LISTEN_FOR_EXIT);
             }
-
             //mobile # input
             if (attempts != MAX_ATTEMPTS && !exit) {
                 telNumber[numberOfFamilies] = getInput("Introdueix un telefon de contacte:", TEL_NUMBER_RANGE[MIN], TEL_NUMBER_RANGE[MAX], LISTEN_FOR_EXIT);
@@ -92,7 +88,6 @@ public class FamiliesAcollida {
 
             //Print why current input was cancelled, or add 1 to numberOfFamilies if it wasn't
             errorMessageHandler();
-
             //ask to continue input
             continueAskingForFamilies = getInput("\nContinuar introduint dades? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
 
@@ -115,7 +110,7 @@ public class FamiliesAcollida {
                 
 
                 //ordenar places
-                //mostrar nomes entrades amb places demanades
+                //mostrar entrades amb places demanades
             }
         }
     }
