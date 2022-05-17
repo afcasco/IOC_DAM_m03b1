@@ -23,7 +23,6 @@ public class FamiliesAcollida {
     private static final int TELF = 4;
 
     private enum Accomodation {
-
         SHARED {public String toString() {return "HHabitaci compartida             ";}},
         SINGLE {public String toString() {return "Habitacio                     ";}},
         HOME {public String toString() {return "Habitatge sencer                 ";}},
@@ -102,57 +101,55 @@ public class FamiliesAcollida {
             printFamilyData();
 
             placesDisplay = getInput("\nVols consultar per numero de places? (si: 1/ no:0)", MIN, MAX, DONT_LISTEN_FOR_EXIT);
-            if(placesDisplay==1) {
+            if (placesDisplay == 1) {
                 //volem ordenar per places
                 System.out.println("volem ordenar por places");
                 //quantes places minimes mostrar
                 queryPlaces = getInput("\nQuantes places necessiteu? (1-99)", PLACES_RANGE[MIN], PLACES_RANGE[MAX], DONT_LISTEN_FOR_EXIT);
-                System.out.println("volem ENTRADES amb "+queryPlaces+" o mes");
-                
-//modify
+                System.out.println("volem ENTRADES amb " + queryPlaces + " o mes");
+
                 //ordenar places
                 if (queryPlaces == 1) {
-                //Bubble sort around places[i]
-                for (int i = 0; i < numberOfFamilies; i++) {
-                    for (int j = 0; j < numberOfFamilies - i - 1; j++) {
-                        int aux;
-                        if (familyData[j][ID] < familyData[j + 1][ID]) {
-                            //exchange all arrays around places[]
-                            aux = familyData[j][ID];
-                            familyData[j][ID] = familyData[j + 1][ID];
-                            familyData[j + 1][ID] = aux;
-                            aux = familyData[j][PLACES];
-                            familyData[j][PLACES] = familyData[j + 1][PLACES];
-                            familyData[j + 1][PLACES] = aux;
-                            aux = familyData[j][LANGUAGE];
-                            familyData[j][LANGUAGE] = familyData[j + 1][LANGUAGE];
-                            familyData[j + 1][LANGUAGE] = aux;
-                            aux = familyData[j][ROOM];
-                            familyData[j][ROOM] = familyData[j + 1][ROOM];
-                            familyData[j + 1][ROOM] = aux;
-                            aux = familyData[j][TELF];
-                            familyData[j][TELF] = familyData[j + 1][TELF];
-                            familyData[j + 1][TELF] = aux;
+                    //Bubble sort around places[i]
+                    for (int i = 0; i < numberOfFamilies; i++) {
+                        for (int j = 0; j < numberOfFamilies - i - 1; j++) {
+                            int aux;
+                            if (familyData[j][ID] < familyData[j + 1][ID]) {
+                                //exchange all arrays around places[]
+                                aux = familyData[j][ID];
+                                familyData[j][ID] = familyData[j + 1][ID];
+                                familyData[j + 1][ID] = aux;
+                                aux = familyData[j][PLACES];
+                                familyData[j][PLACES] = familyData[j + 1][PLACES];
+                                familyData[j + 1][PLACES] = aux;
+                                aux = familyData[j][LANGUAGE];
+                                familyData[j][LANGUAGE] = familyData[j + 1][LANGUAGE];
+                                familyData[j + 1][LANGUAGE] = aux;
+                                aux = familyData[j][ROOM];
+                                familyData[j][ROOM] = familyData[j + 1][ROOM];
+                                familyData[j + 1][ROOM] = aux;
+                                aux = familyData[j][TELF];
+                                familyData[j][TELF] = familyData[j + 1][TELF];
+                                familyData[j + 1][TELF] = aux;
+                            }
+                        }
+                    }
+
+                    placesDisplay = getInput("How many spots do you need?", PLACES_RANGE[MIN], PLACES_RANGE[MAX], DONT_LISTEN_FOR_EXIT);
+
+                    System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
+                    for (int i = 0; i < numberOfFamilies; i++) {
+                        if (familyData[i][PLACES] >= placesDisplay) {
+                            parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
+                            allotjament = switchRoomType(familyData[i][ROOM]);
+                            System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
                         }
                     }
                 }
-
-                placesDisplay = getInput("How many spots do you need?",PLACES_RANGE[MIN],PLACES_RANGE[MAX],DONT_LISTEN_FOR_EXIT);
-
-                System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
-                for (int i = 0; i < numberOfFamilies; i++) {
-                    if (familyData[i][PLACES] >= placesDisplay) {
-                       parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
-                       allotjament = switchRoomType(familyData[i][ROOM]);
-                        System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
-                    }
-                }
-            }
-              
             }
         }
     }
-//end modify
+
     public int getInput(String inputText, int min, int max, boolean listenForExit) {
         exit = false;
         int inputValue = 0;
@@ -169,7 +166,7 @@ public class FamiliesAcollida {
                     if (inputValue == -1) exit = true;
                 }
             }
-            if (!inRange&&!exit) {
+            if (!inRange && !exit) {
                 attempts++;
                 System.out.println(BAD_VALUE_INPUT);
             }
@@ -186,8 +183,8 @@ public class FamiliesAcollida {
         System.out.println("      (3) " + Accomodation.DORM);
     }
 
-    public void errorMessageHandler(){
-        if(attempts==MAX_ATTEMPTS&&!exit){
+    public void errorMessageHandler() {
+        if (attempts == MAX_ATTEMPTS && !exit) {
             System.out.println("reached max attemts, canceling current family input...");
 
         } else if (exit) {
@@ -197,16 +194,16 @@ public class FamiliesAcollida {
         }
     }
 
-    public void printFamilyData(){
+    public void printFamilyData() {
         System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
-        for(int i=0;i<numberOfFamilies;i++){
+        for (int i = 0; i < numberOfFamilies; i++) {
             parlaIdioma = switchIdioma(familyData[i][LANGUAGE]);
             allotjament = switchRoomType(familyData[i][ROOM]);
             System.out.println(familyData[i][ID] + "\t" + familyData[i][PLACES] + "\t" + parlaIdioma + "\t\t" + allotjament + "\t" + familyData[i][TELF]);
         }
     }
 
-        public static String switchIdioma(int languageSelection) {
+    public static String switchIdioma(int languageSelection) {
         String languageReturn;
         if (languageSelection == 1) {
             languageReturn = PARLA_SI;
