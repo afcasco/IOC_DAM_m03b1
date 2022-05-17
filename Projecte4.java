@@ -61,7 +61,6 @@ public class Projecte1 {
         //declare arrays to store data (max 10 families)
         int[][] familyData = new int[MAX_FAMILIES][5];
 
-
         do {
             exit = false;
             keepAsking = true;
