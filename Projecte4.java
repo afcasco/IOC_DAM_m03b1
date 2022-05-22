@@ -1,5 +1,3 @@
-package FamiliesAcollida;
-
 import java.util.Scanner;
 
 public class Projecte4 {
@@ -7,7 +5,7 @@ public class Projecte4 {
     public static final int[] ID_RANGE = new int[]{10, 999};
     public static final int[] PLACES_RANGE = new int[]{1, 99};
     public static final int[] ROOM_RANGE = new int[]{0, 3};
-    public static final int[] TELF_RANGE = new int[]{111111111, 999999999};
+    public static final int[] TELF_RANGE = new int[]{111_111_111, 999_999_999}; //underscore separation for readability
     private static final int MIN = 0;
     private static final int MAX = 1;
     private static final int MAX_ATTEMPTS = 3;
@@ -38,13 +36,15 @@ public class Projecte4 {
             ****************************************************************************
             """;
 
+    //declare arrays to store data (max 10 families)
+    static int[][] familyData = new int[MAX_FAMILIES][5];
+    static int attempts;
+
     public static void main(String[] args) {
 
         //Show how-to input data text
         System.out.println(MENU);
-
         Scanner input = new Scanner(System.in);
-        int attempts;
         int keepAskingInt;
         int nFam = 0;
         int queryPlaces = 0;
@@ -59,9 +59,6 @@ public class Projecte4 {
         boolean inRange;
         boolean keepAsking;
         boolean exit;
-
-        //declare arrays to store data (max 10 families)
-        int[][] familyData = new int[MAX_FAMILIES][5];
 
         do {
             exit = false;
@@ -83,10 +80,7 @@ public class Projecte4 {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange && !exit) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
 
@@ -107,10 +101,7 @@ public class Projecte4 {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange && !exit) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
 
@@ -131,10 +122,7 @@ public class Projecte4 {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange && !exit) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
 
@@ -142,11 +130,7 @@ public class Projecte4 {
             if (attempts < MAX_ATTEMPTS && !exit) {
                 inRange = false;
                 attempts = 0;
-                System.out.println("De quin tipus d'allotjament es tracta?:");
-                System.out.println("      (0) " + SHARED);
-                System.out.println("      (1) " + SINGLE);
-                System.out.println("      (2) " + HOME);
-                System.out.println("      (3) " + DORM);
+                printTipusAllotjament();
             }
             while (!inRange && attempts < MAX_ATTEMPTS && !exit) {
                 System.out.println("Introdueix una de les opcions:");
@@ -160,10 +144,7 @@ public class Projecte4 {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange && !exit) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
 
@@ -184,10 +165,7 @@ public class Projecte4 {
                         }
                     }
                 }
-                if (!inRange && !exit) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange && !exit) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
 
@@ -215,10 +193,7 @@ public class Projecte4 {
                         inRange = false;
                     }
                 }
-                if (!inRange) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
             if (attempts == MAX_ATTEMPTS || keepAskingInt == 0) {
@@ -252,10 +227,7 @@ public class Projecte4 {
                         inRange = false;
                     }
                 }
-                if (!inRange) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
             //SORT BY PLACES
@@ -263,24 +235,9 @@ public class Projecte4 {
                 //Bubble sort around places[i]
                 for (int i = 0; i < nFam; i++) {
                     for (int j = 0; j < nFam - i - 1; j++) {
-                        int aux;
                         if (familyData[j][PLACES] > familyData[j + 1][PLACES]) {
                             //exchange all arrays around places[]
-                            aux = familyData[j][ID];
-                            familyData[j][ID] = familyData[j + 1][ID];
-                            familyData[j + 1][ID] = aux;
-                            aux = familyData[j][PLACES];
-                            familyData[j][PLACES] = familyData[j + 1][PLACES];
-                            familyData[j + 1][PLACES] = aux;
-                            aux = familyData[j][LANGUAGE];
-                            familyData[j][LANGUAGE] = familyData[j + 1][LANGUAGE];
-                            familyData[j + 1][LANGUAGE] = aux;
-                            aux = familyData[j][ROOM];
-                            familyData[j][ROOM] = familyData[j + 1][ROOM];
-                            familyData[j + 1][ROOM] = aux;
-                            aux = familyData[j][TELF];
-                            familyData[j][TELF] = familyData[j + 1][TELF];
-                            familyData[j + 1][TELF] = aux;
+                            sortArrayPositions(j);
                         }
                     }
                 }
@@ -297,14 +254,11 @@ public class Projecte4 {
                             inRange = false;
                         }
                     }
-                    if (!inRange) {
-                        System.out.println(INVALID_INPUT_ERROR_MSG);
-                        attempts++;
-                    }
+                    if (!inRange) increaseAttemptsAndPrintErrorIfBadValue();
                     input.nextLine();
                 }
 
-
+                //print data
                 System.out.println(PRINT_RESULTS_HEADER);
                 for (int i = 0; i < nFam; i++) {
                     if (familyData[i][PLACES] >= placesDisplay) {
@@ -333,38 +287,17 @@ public class Projecte4 {
                         attempts = 0;
                         input.nextLine();
                         while (!inRange && attempts < MAX_ATTEMPTS) {
-                            System.out.println("Tipus d'allotjament?");
-                            System.out.println("      (0) " + SHARED);
-                            System.out.println("      (1) " + SINGLE);
-                            System.out.println("      (2) " + HOME);
-                            System.out.println("      (3) " + DORM);
+                            printTipusAllotjament();
                             if (input.hasNextInt()) {
                                 type = input.nextInt();
-                                if ((type < ROOM_RANGE[MIN]) || (type > ROOM_RANGE[MAX])) {
-                                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                                    attempts++;
-                                    input.nextLine();
+                                if (type < ROOM_RANGE[MIN] || (type > ROOM_RANGE[MAX])) {
+                                    increaseAttemptsAndPrintErrorIfBadValue();
                                 } else {
                                     for (int i = 0; i < nFam; i++) {
                                         for (int j = 0; j < nFam - i - 1; j++) {
-                                            int aux;
                                             if (familyData[j][ID] < familyData[j + 1][ID]) {
-                                                //exchange all arrays around places[]
-                                                aux = familyData[j][ID];
-                                                familyData[j][ID] = familyData[j + 1][ID];
-                                                familyData[j + 1][ID] = aux;
-                                                aux = familyData[j][PLACES];
-                                                familyData[j][PLACES] = familyData[j + 1][PLACES];
-                                                familyData[j + 1][PLACES] = aux;
-                                                aux = familyData[j][LANGUAGE];
-                                                familyData[j][LANGUAGE] = familyData[j + 1][LANGUAGE];
-                                                familyData[j + 1][LANGUAGE] = aux;
-                                                aux = familyData[j][ROOM];
-                                                familyData[j][ROOM] = familyData[j + 1][ROOM];
-                                                familyData[j + 1][ROOM] = aux;
-                                                aux = familyData[j][TELF];
-                                                familyData[j][TELF] = familyData[j + 1][TELF];
-                                                familyData[j + 1][TELF] = aux;
+                                                //sort by id in descending order
+                                                sortArrayPositions(j);
                                             }
                                         }
                                     }
@@ -379,19 +312,17 @@ public class Projecte4 {
                                     }
                                     attempts = 0;
                                     inRange = true;
-                                    input.nextLine();
                                 }
+                                input.nextLine();
                             } else {
                                 input.nextLine();
-                                System.out.println(INVALID_INPUT_ERROR_MSG);
-                                attempts++;
+                                increaseAttemptsAndPrintErrorIfBadValue();
                             }
                         }
                     }
                 } else {
                     input.nextLine();
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
+                    increaseAttemptsAndPrintErrorIfBadValue();
                 }
             }
 
@@ -407,10 +338,7 @@ public class Projecte4 {
                         inRange = false;
                     }
                 }
-                if (!inRange) {
-                    System.out.println(INVALID_INPUT_ERROR_MSG);
-                    attempts++;
-                }
+                if (!inRange) increaseAttemptsAndPrintErrorIfBadValue();
                 input.nextLine();
             }
 
@@ -423,21 +351,13 @@ public class Projecte4 {
                 System.out.println("\nNumero de families que acullen: " + nFam);
                 System.out.println("Numero de places totals: " + totalPlaces);
                 System.out.println("Numero de families que parlen rus/ucraines: " + totalIdioma);
-
             }
-
         }
     }
 
     //small test function to change int value input to string
     public static String switchIdioma(int languageSelection) {
-        String languageReturn;
-        if (languageSelection == 1) {
-            languageReturn = PARLA_SI;
-        } else {
-            languageReturn = PARLA_NO;
-        }
-        return languageReturn;
+        return (languageSelection == 1) ? PARLA_SI : PARLA_NO;
     }
 
     //small test function to change int value input to string
@@ -449,5 +369,27 @@ public class Projecte4 {
             default -> DORM;
         };
     }
-}
 
+    //for loop for sorting array around given position
+    public static void sortArrayPositions(int m) {
+        for (int k = 0; k < familyData[0].length; k++) {
+            int aux = familyData[m][k];
+            familyData[m][k] = familyData[m + 1][k];
+            familyData[m + 1][k] = aux;
+        }
+    }
+
+    //print tipus allotjament decoration
+    public static void printTipusAllotjament() {
+        System.out.println("Tipus d'allotjament?");
+        System.out.println("      (0) " + SHARED);
+        System.out.println("      (1) " + SINGLE);
+        System.out.println("      (2) " + HOME);
+        System.out.println("      (3) " + DORM);
+    }
+
+    public static void increaseAttemptsAndPrintErrorIfBadValue(){
+        System.out.println(INVALID_INPUT_ERROR_MSG);
+        attempts++;
+    }
+}
