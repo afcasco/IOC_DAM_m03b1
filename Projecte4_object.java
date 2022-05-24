@@ -3,32 +3,36 @@ import java.util.ArrayList;
 
 class Family {
 
+
+
 	int id;
 	int telNumber;
 	String accomodationType;
 	int pplToAccomodate;
 	boolean speaksRu;
 
+	static int attempts = 0;
+
 	Family(){
-		this.id = getIntInput();
-		this.telNumber = getIntInput();
-		this.accomodationType = getRoomType(getIntInput());
-		this.pplToAccomodate = getIntInput();
-		this.speaksRu = getBooleanInput();
+
+		this.id = getIntInput("Enter ID number: ");
+		this.telNumber = getIntInput("Enter telephone number: ");
+		this.accomodationType = getRoomType(getIntInput("Enter room type"));
+		this.pplToAccomodate = getIntInput("Enter how many people: ");
+		this.speaksRu = getBooleanInput("Enter 0 or 1 (no/yes");
 	}
 	
-	int getIntInput() {
-		System.out.println("entradada: ");
+	int getIntInput(String inputText) {
+		System.out.println(inputText);
 	    Scanner input = new Scanner(System.in);
 	    return input.nextInt();
 	}
-	boolean getBooleanInput(){
+	boolean getBooleanInput(String inputText){
+		System.out.println(inputText);
 	    Scanner input = new Scanner(System.in);
 	    return (input.nextInt()==1) ? true : false;
 	}
 	String getRoomType(int m){
-		Scanner input = new Scanner(System.in);
-		m = input.nextInt();
 		String room;
 	    switch(m) {
 	    	case 0:
@@ -46,12 +50,6 @@ class Family {
 	    return room;
 	}
 
-	public enum Type = { 
-		SHARED("shared"),
-		SINGLE("single"),
-		FULL("full"),
-		COMUNAL("comunal");
-	}
 }
 
 class Acollida {
