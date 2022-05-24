@@ -3,6 +3,7 @@ package FamiliesAcollida;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import static java.lang.System.out;
 
 class Family {
 
@@ -58,7 +59,7 @@ class Family {
         int getValue = 0;
         setAnswerOk(false);
         while (attempFamilyts < MAX_ATTEMPTS && !isAnswerOk()) {
-            System.out.printf("%s (%d-%d):%n", inputText, min, max);
+            out.printf("%s (%d-%d):%n", inputText, min, max);
             Scanner input = new Scanner(System.in);
             setAnswerOk(input.hasNextInt());
             if (isAnswerOk()) {
@@ -68,8 +69,8 @@ class Family {
                 }
             }
             if (!isAnswerOk()) {
-                System.out.println("Value has to be between " + min + " and " + max);
-                System.out.println(MAX_ATTEMPTS - 1 - attempFamilyts + " attempFamilyts remaining...");
+                out.println("Value has to be between " + min + " and " + max);
+                out.println(MAX_ATTEMPTS - 1 - attempFamilyts + " attempFamilyts remaining...");
                 setAttempFamilyts(getAttempFamilyts() + 1);
             }
             input.nextLine();
@@ -149,16 +150,16 @@ class Acollida {
             if (Family.isAnswerOk()) {
                 familiesList.add(tempFamily);
             } else {
-                System.out.println("Error in data entry, family won't be added.");
+                out.println("Error in data entry, family won't be added.");
             }
             anotherFamily = Family.getIntInput("Register another family?", no, yes);
             if (anotherFamily == 0) keepAsking = false;
         }
 
-        System.out.println("Total families registered: " + familiesList.size());
+        out.println("Total families registered: " + familiesList.size());
         if (familiesList.size() > 0) {
-            System.out.println("\nId\tplaces\trus/ucraines\ttipus\ttelefon");
-            System.out.println(familiesList.stream().map(Object::toString).collect(Collectors.joining("")));
+           out.println("\nId\tplaces\trus/ucraines\ttipus\ttelefon");
+            out.println(familiesList.stream().map(Object::toString).collect(Collectors.joining("")));
         }
 
     }
