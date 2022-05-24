@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 
 class Family {
 
-    public static final int MIN = 0;
-    public static final int MAX = 1;
+    private static final int MIN = 0;
+    private static final int MAX = 1;
     private static final int MAX_ATTEMPTS = 3;
     private static final int[] ID_RANGE = {10, 999};
     private static final int[] TEL_NUM_RANGE = {111_111_111, 999_999_999};
     private static final int[] ROOM_RANGE = {0, 3};
     private static final int[] PPL_RANGE = {1, 99};
-    static boolean answerOk;
-    static int attempts;
+    private static boolean answerOk;
+    private static int attempts;
     private int id;
     private int telNumber;
     private String accomodationType;
@@ -54,11 +54,11 @@ class Family {
     }
 
     public static int getIntInput(String inputText, int min, int max) {
-        attempts = 0;
+        setAttempts(0);
         int getValue = 0;
         setAnswerOk(false);
         while (attempts < MAX_ATTEMPTS && !isAnswerOk()) {
-            System.out.printf("%s (%d-%d):%n",inputText,min,max);
+            System.out.printf("%s (%d-%d):%n", inputText, min, max);
             Scanner input = new Scanner(System.in);
             setAnswerOk(input.hasNextInt());
             if (isAnswerOk()) {
@@ -139,24 +139,25 @@ class Family {
 class Acollida {
     public static void main(String[] args) {
 
+        int no = 0, yes = 1;
         boolean keepAsking = true;
         int anotherFamily;
         ArrayList<Family> familiesList = new ArrayList<>();
 
         while (keepAsking) {
             Family temp = new Family();
-            if (Family.answerOk) {
+            if (Family.isAnswerOk()) {
                 familiesList.add(temp);
             } else {
                 System.out.println("Error in data entry, family won't be added.");
             }
-            anotherFamily = Family.getIntInput("Register another family?", Family.MIN, Family.MAX);
+            anotherFamily = Family.getIntInput("Register another family?", no, yes);
             if (anotherFamily == 0) keepAsking = false;
         }
 
         System.out.println("Total families registered: " + familiesList.size());
         if (familiesList.size() > 0) {
-            System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
+            System.out.println("\nId\tplaces\trus/ucraines\ttipus\ttelefon");
             System.out.println(familiesList.stream().map(Object::toString).collect(Collectors.joining("")));
         }
 
