@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 class Family {
 
-    private static final int MIN = 0;
-    private static final int MAX = 1;
+    public static final int MIN = 0;
+    public static final int MAX = 1;
     private static final int MAX_ATTEMPTS = 3;
     private static final int[] ID_RANGE = {10,999};
     private static final int[] TEL_NUM_RANGE = {111_111_111,999_999_999};
@@ -15,7 +15,7 @@ class Family {
     int telNumber;
     String accomodationType;
     int pplToAccomodate;
-    boolean speaksRu;
+    String speaksRu;
     static boolean answerOk;
     static int attempts;
 
@@ -24,18 +24,24 @@ class Family {
         if (answerOk) {
             this.telNumber = getIntInput("Enter telephone number: ", TEL_NUM_RANGE[MIN], TEL_NUM_RANGE[MAX]);
             if (answerOk) {
-                this.accomodationType = getRoomType(getIntInput("Enter room type", ROOM_RANGE[MIN], ROOM_RANGE[MAX]));
+                this.accomodationType = getRoomType(getIntInput("Enter room type: ", ROOM_RANGE[MIN], ROOM_RANGE[MAX]));
                 if (answerOk) {
                     this.pplToAccomodate = getIntInput("Enter how many people: ", PPL_RANGE[MIN], PPL_RANGE[MAX]);
                     if (answerOk) {
-                        this.speaksRu = getBooleanInput(getIntInput("Enter 0 or 1 (no/yes", MIN, MAX));
+                        this.speaksRu = getSpeaksLang(getIntInput("Enter 0 or 1 (no/yes)", MIN, MAX));
                     }
                 }
             }
         }
     }
 
-    int getIntInput(String inputText, int min, int max) {
+
+   @Override
+   public String toString() {
+        return (this.id+" "+this.telNumber +" "+this.accomodationType +" "+ this.speaksRu+"\n");
+   }
+
+    static int getIntInput(String inputText, int min, int max) {
         attempts = 0;
         int getValue = 0;
         Family.answerOk = false;
@@ -51,7 +57,7 @@ class Family {
             }
             if (!answerOk) {
                 System.out.println("Value has to be between " + min + " and " + max);
-                System.out.println(MAX_ATTEMPTS - 1 - attempts + " remaining...");
+                System.out.println(MAX_ATTEMPTS - 1 - attempts + " attempts remaining...");
                 attempts++;
             }
             input.nextLine();
@@ -59,8 +65,8 @@ class Family {
         return getValue;
     }
 
-    boolean getBooleanInput(int m) {
-        return (m == 1) ? true : false;
+    String getSpeaksLang(int m) {
+        return (m == 1) ? "Yes" : "No";
     }
     String getRoomType(int m) {
         String room;
@@ -85,9 +91,9 @@ class Acollida {
     public static void main(String[] args) {
 
         boolean keepAsking = true;
-        int continu;
-
+        int anotherFamily;
         ArrayList < Family > familiesList = new ArrayList < Family > ();
+       
         while (keepAsking) {
             Family temp = new Family();
             if(Family.answerOk) {
@@ -97,13 +103,19 @@ class Acollida {
             }
             
             Scanner tempInput = new Scanner(System.in);
-            System.out.println("continue entering families?");
-            continu = tempInput.nextInt();
+            anotherFamily = Family.getIntInput("Register another family?",Family.MIN,Family.MAX);
 
-            if (continu == 0) keepAsking = false;
+            if (anotherFamily == 0) keepAsking = false;
+
+
+            
         }
+        System.out.println("Total families registered: " + familiesList.size());
 
-        System.out.println("arraylist size " + familiesList.size());
+        System.out.println(familiesList); 
+
+
 
     }
 }
+
