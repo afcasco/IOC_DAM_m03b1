@@ -45,6 +45,13 @@ class Family {
 	    }
 	    return room;
 	}
+
+	public enum Type = { 
+		SHARED("shared"),
+		SINGLE("single"),
+		FULL("full"),
+		COMUNAL("comunal");
+	}
 }
 
 class Acollida {
