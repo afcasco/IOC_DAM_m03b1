@@ -112,6 +112,7 @@ class Acollida {
         }
         System.out.println("Total families registered: " + familiesList.size());
 
+        System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
         System.out.println(familiesList); 
 
 
