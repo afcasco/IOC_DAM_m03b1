@@ -14,7 +14,7 @@ class Family {
     private static final int[] ROOM_RANGE = {0, 3};
     private static final int[] PPL_RANGE = {1, 99};
     private static boolean answerOk;
-    private static int attempts;
+    private static int attempFamilyts;
     private int id;
     private int telNumber;
     private String accomodationType;
@@ -24,13 +24,13 @@ class Family {
     Family() {
         setId(getIntInput("Enter ID number", ID_RANGE[MIN], ID_RANGE[MAX]));
         if (isAnswerOk()) {
-            setTelNumber(telNumber = getIntInput("Enter telephone number", TEL_NUM_RANGE[MIN], TEL_NUM_RANGE[MAX]));
+            setTelNumber(getIntInput("Enter telephone number", TEL_NUM_RANGE[MIN], TEL_NUM_RANGE[MAX]));
             if (isAnswerOk()) {
-                setAccomodationType(accomodationType = getRoomType(getIntInput("Enter room type\n0: Shared\n1: Single\n2: Home\n3: Dorm\n", ROOM_RANGE[MIN], ROOM_RANGE[MAX])));
+                setAccomodationType(getRoomType(getIntInput("Enter room type\n0: Shared\n1: Single\n2: Home\n3: Dorm\n", ROOM_RANGE[MIN], ROOM_RANGE[MAX])));
                 if (isAnswerOk()) {
-                    setPplToAccomodate(pplToAccomodate = getIntInput("Enter how many people", PPL_RANGE[MIN], PPL_RANGE[MAX]));
+                    setPplToAccomodate(getIntInput("Enter how many people", PPL_RANGE[MIN], PPL_RANGE[MAX]));
                     if (isAnswerOk()) {
-                        setSpeaksRu(speaksRu = getSpeaksLang(getIntInput("Speaks ru or ukr", MIN, MAX)));
+                        setSpeaksRu(getSpeaksLang(getIntInput("Speaks ru or ukr", MIN, MAX)));
                     }
                 }
             }
@@ -45,19 +45,19 @@ class Family {
         Family.answerOk = answerOk;
     }
 
-    public static int getAttempts() {
-        return attempts;
+    public static int getAttempFamilyts() {
+        return attempFamilyts;
     }
 
-    public static void setAttempts(int attempts) {
-        Family.attempts = attempts;
+    public static void setAttempFamilyts(int attempFamilyts) {
+        Family.attempFamilyts = attempFamilyts;
     }
 
     public static int getIntInput(String inputText, int min, int max) {
-        setAttempts(0);
+        setAttempFamilyts(0);
         int getValue = 0;
         setAnswerOk(false);
-        while (attempts < MAX_ATTEMPTS && !isAnswerOk()) {
+        while (attempFamilyts < MAX_ATTEMPTS && !isAnswerOk()) {
             System.out.printf("%s (%d-%d):%n", inputText, min, max);
             Scanner input = new Scanner(System.in);
             setAnswerOk(input.hasNextInt());
@@ -69,8 +69,8 @@ class Family {
             }
             if (!isAnswerOk()) {
                 System.out.println("Value has to be between " + min + " and " + max);
-                System.out.println(MAX_ATTEMPTS - 1 - attempts + " attempts remaining...");
-                setAttempts(getAttempts() + 1);
+                System.out.println(MAX_ATTEMPTS - 1 - attempFamilyts + " attempFamilyts remaining...");
+                setAttempFamilyts(getAttempFamilyts() + 1);
             }
             input.nextLine();
         }
@@ -130,8 +130,8 @@ class Family {
         return switch (m) {
             case 0 -> "shared";
             case 1 -> "single";
-            case 2 -> "full";
-            default -> "comunal";
+            case 2 -> "home";
+            default -> "dorm";
         };
     }
 }
@@ -145,9 +145,9 @@ class Acollida {
         ArrayList<Family> familiesList = new ArrayList<>();
 
         while (keepAsking) {
-            Family temp = new Family();
+            Family tempFamily = new Family();
             if (Family.isAnswerOk()) {
-                familiesList.add(temp);
+                familiesList.add(tempFamily);
             } else {
                 System.out.println("Error in data entry, family won't be added.");
             }
