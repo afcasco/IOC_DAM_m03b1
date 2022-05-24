@@ -101,7 +101,7 @@ class Acollida {
             } else {
             	System.out.println("Error in data entry, family won't be added.");
             }
-            
+
             Scanner tempInput = new Scanner(System.in);
             anotherFamily = Family.getIntInput("Register another family?",Family.MIN,Family.MAX);
 
@@ -114,9 +114,6 @@ class Acollida {
 
         System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
         System.out.println(familiesList); 
-
-
-
     }
 }
 
