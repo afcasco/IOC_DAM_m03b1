@@ -24,18 +24,10 @@ class Family {
 
     Family() {
         setId(getIntInput("Enter ID number", ID_RANGE[MIN], ID_RANGE[MAX]));
-        if (isAnswerOk()) {
-            setTelNumber(getIntInput("Enter telephone number", TEL_NUM_RANGE[MIN], TEL_NUM_RANGE[MAX]));
-            if (isAnswerOk()) {
-                setAccomodationType(getRoomType(getIntInput("Enter room type\n0: Shared\n1: Single\n2: Home\n3: Dorm\n", ROOM_RANGE[MIN], ROOM_RANGE[MAX])));
-                if (isAnswerOk()) {
-                    setPplToAccomodate(getIntInput("Enter how many people", PPL_RANGE[MIN], PPL_RANGE[MAX]));
-                    if (isAnswerOk()) {
-                        setSpeaksRu(getSpeaksLang(getIntInput("Speaks ru or ukr", MIN, MAX)));
-                    }
-                }
-            }
-        }
+        if (isAnswerOk()) setTelNumber(getIntInput("Enter telephone number", TEL_NUM_RANGE[MIN], TEL_NUM_RANGE[MAX]));
+        if (isAnswerOk())  setAccomodationType(getRoomType(getIntInput("Enter room type\n0: Shared\n1: Single\n2: Home\n3: Dorm\n", ROOM_RANGE[MIN], ROOM_RANGE[MAX])));
+        if (isAnswerOk()) setPplToAccomodate(getIntInput("Enter how many people", PPL_RANGE[MIN], PPL_RANGE[MAX]));
+        if (isAnswerOk()) setSpeaksRu(getSpeaksLang(getIntInput("Speaks ru or ukr", MIN, MAX)));
     }
 
     public static boolean isAnswerOk() {
@@ -164,5 +156,4 @@ class Acollida {
 
     }
 }
-
 
