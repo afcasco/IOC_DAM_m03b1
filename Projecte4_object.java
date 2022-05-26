@@ -1,119 +1,190 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.stream.Collectors;  
+import java.util.*;
+import static java.lang.System.out;
 
 class Family {
 
-    public static final int MIN = 0;
-    public static final int MAX = 1;
+    private static final int MIN = 0;
+    private static final int MAX = 1;
     private static final int MAX_ATTEMPTS = 3;
-    private static final int[] ID_RANGE = {10,999};
-    private static final int[] TEL_NUM_RANGE = {111_111_111,999_999_999};
-    private static final int[] ROOM_RANGE = {0,3};
-    private static final int[] PPL_RANGE = {1,99};
+    private static final int[] ID_RANGE = {10, 999};
+    private static final int[] TEL_NUM_RANGE = {111_111_111, 999_999_999};
+    private static final int[] ROOM_RANGE = {0, 3};
+    private static final int[] PPL_RANGE = {1, 99};
+    private static boolean answerOk;
+    private static int failedAttempts;
+    private int id;
+    private int telNumber;
+    private String accomodationType;
+    private int pplToAccomodate;
+    private String speaksRu;
 
-    int id;
-    int telNumber;
-    String accomodationType;
-    int pplToAccomodate;
-    String speaksRu;
-    static boolean answerOk;
-    static int attempts;
-
-    Family() {
-        this.id = getIntInput("Enter ID number: ", ID_RANGE[MIN], ID_RANGE[MAX]);
-        if (answerOk) {
-            this.telNumber = getIntInput("Enter telephone number: ", TEL_NUM_RANGE[MIN], TEL_NUM_RANGE[MAX]);
-            if (answerOk) {
-                this.accomodationType = getRoomType(getIntInput("Enter room type: ", ROOM_RANGE[MIN], ROOM_RANGE[MAX]));
-                if (answerOk) {
-                    this.pplToAccomodate = getIntInput("Enter how many people: ", PPL_RANGE[MIN], PPL_RANGE[MAX]);
-                    if (answerOk) {
-                        this.speaksRu = getSpeaksLang(getIntInput("Enter 0 or 1 (no/yes)", MIN, MAX));
-                    }
-                }
-            }
-        }
+    public Family() {
+        setId(getIntInput("Enter ID number", ID_RANGE[MIN], ID_RANGE[MAX]));
+        if (isAnswerOk()) setTelNumber(getIntInput("Enter telephone number", TEL_NUM_RANGE[MIN], TEL_NUM_RANGE[MAX]));
+        if (isAnswerOk()) setAccomodationType(getRoomType(getIntInput("Enter room type\n0: Shared\n1: Single\n2: Home\n3: Dorm\n", ROOM_RANGE[MIN], ROOM_RANGE[MAX])));
+        if (isAnswerOk()) setPplToAccomodate(getIntInput("Enter how many people", PPL_RANGE[MIN], PPL_RANGE[MAX]));
+        if (isAnswerOk()) setSpeaksRu(getSpeaksLang(getIntInput("Speaks ru or ukr", MIN, MAX)));
     }
 
 
-   @Override
-   public String toString() {
-        return (this.id+" "+this.telNumber +" "+this.accomodationType +" "+ this.speaksRu+"\n");
-   }
 
-    static int getIntInput(String inputText, int min, int max) {
-        attempts = 0;
+    public static boolean isAnswerOk() {
+        return answerOk;
+    }
+
+    public static void setAnswerOk(boolean answerOk) {
+        Family.answerOk = answerOk;
+    }
+
+    public static int getAttempFamilyts() {
+        return failedAttempts;
+    }
+
+    public static void setAttempFamilyts(int failedAttempts) {
+        Family.failedAttempts = failedAttempts;
+    }
+
+    public static int getIntInput(String inputText, int min, int max) {
+        setAttempFamilyts(0);
         int getValue = 0;
-        Family.answerOk = false;
-        while (attempts < 3 && !answerOk) {
-            System.out.println(inputText);
+        setAnswerOk(false);
+        while (failedAttempts < MAX_ATTEMPTS && !isAnswerOk()) {
+            out.printf("%s (%d-%d):%n", inputText, min, max);
             Scanner input = new Scanner(System.in);
-            answerOk = input.hasNextInt();
-            if (answerOk) {
+            setAnswerOk(input.hasNextInt());
+            if (isAnswerOk()) {
                 getValue = input.nextInt();
                 if (getValue < min || getValue > max) {
-                    answerOk = false;
+                    setAnswerOk(false);
                 }
             }
-            if (!answerOk) {
-                System.out.println("Value has to be between " + min + " and " + max);
-                System.out.println(MAX_ATTEMPTS - 1 - attempts + " attempts remaining...");
-                attempts++;
+            if (!isAnswerOk()) {
+                out.println("Value has to be between " + min + " and " + max);
+                out.println(MAX_ATTEMPTS - 1 - failedAttempts + " failedAttempts remaining...");
+                setAttempFamilyts(getAttempFamilyts() + 1);
             }
             input.nextLine();
         }
         return getValue;
     }
 
-    String getSpeaksLang(int m) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTelNumber() {
+        return telNumber;
+    }
+
+    public void setTelNumber(int telNumber) {
+        this.telNumber = telNumber;
+    }
+
+    public String getAccomodationType() {
+        return accomodationType;
+    }
+
+    public void setAccomodationType(String accomodationType) {
+        this.accomodationType = accomodationType;
+    }
+
+    public int getPplToAccomodate() {
+        return pplToAccomodate;
+    }
+
+    public void setPplToAccomodate(int pplToAccomodate) {
+        this.pplToAccomodate = pplToAccomodate;
+    }
+
+    public String getSpeaksRu() {
+        return speaksRu;
+    }
+
+    public void setSpeaksRu(String speaksRu) {
+        this.speaksRu = speaksRu;
+    }
+
+    @Override
+    public String toString() {
+        return (getId() + " " + getTelNumber() + " " + getPplToAccomodate() + " " + getAccomodationType() + " " + getSpeaksRu() + "\n");
+    }
+
+    private String getSpeaksLang(int m) {
         return (m == 1) ? "Yes" : "No";
     }
-    String getRoomType(int m) {
-        String room;
+
+
+
+   
+   private String getRoomType(int m) {
+        String temp;
         switch (m) {
-        case 0:
-            room = "shared";
-            break;
-        case 1:
-            room = "single";
-            break;
-        case 2:
-            room = "full";
-            break;
-        default:
-            room = "comunal";
-        }
-        return room;
+            case 0:
+                temp = "shared";
+                break;
+            case 1:
+                temp = "single";
+                break;
+            case 2:
+                temp = "home";
+                break;
+            default:
+                temp = "dorm";
+        };
+        return temp;
     }
 }
+
+class SortByID implements Comparator<Family>{
+     // sorting in ascending order of id
+     public int compare(Family a, Family b){
+         return a.getId() - b.getId();
+     }
+}
+
+
 
 class Acollida {
     public static void main(String[] args) {
 
+        int no = 0, yes = 1;
         boolean keepAsking = true;
         int anotherFamily;
-        ArrayList < Family > familiesList = new ArrayList < Family > ();
-       
+        ArrayList<Family> familiesList = new ArrayList<>();
+
         while (keepAsking) {
-            Family temp = new Family();
-            if(Family.answerOk) {
-            	familiesList.add(temp);
+            Family tempFamily = new Family();
+            if (Family.isAnswerOk()) {
+                familiesList.add(tempFamily);
             } else {
-            	System.out.println("Error in data entry, family won't be added.");
+                out.println("Error in data entry, family won't be added.");
             }
-
-            Scanner tempInput = new Scanner(System.in);
-            anotherFamily = Family.getIntInput("Register another family?",Family.MIN,Family.MAX);
-
+            anotherFamily = Family.getIntInput("Register another family?", no, yes);
             if (anotherFamily == 0) keepAsking = false;
+        }
+
+        out.println("Total families registered: " + familiesList.size());
+        if (familiesList.size() > 0) {
+            out.println("\nId\tplaces\trus/ucraines\ttipus\ttelefon");
+            out.println(familiesList.stream().map(Object::toString).collect(Collectors.joining("")));
+
+            out.println("----------------------------------------");
+
+            Collections.sort(familiesList, new SortByID());
+            out.println("\nId\tplaces\trus/ucraines\ttipus\ttelefon");
+            out.println(familiesList.stream().map(Object::toString).collect(Collectors.joining("")));
 
 
+
+           
             
         }
-        System.out.println("Total families registered: " + familiesList.size());
 
-        System.out.println("\nId\t\tplaces\t\trus/ucraines\t\ttipus\t\t\t\t\t\t\t\t\ttelefon");
-        System.out.println(familiesList); 
     }
 }
 
