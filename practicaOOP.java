@@ -4,11 +4,6 @@ class Dispensador {
     int stockMaxim;
     int stock;
     int stockMinim;
-    int[] packs = {
-        1,
-        2,
-        5
-    };
 
     Dispensador() {
 
@@ -56,7 +51,7 @@ class Reposador {
         viatges -= 1;
         if (viatges == 0) {
             actiu = false;
-            System.out.println("Ultima reposada, el reposador plega per avui");
+            System.out.println("Ultima reposada del dia");
         }
         return cantitatReposar;
     }
@@ -82,7 +77,7 @@ public class VentaXiclets {
                 System.out.println("nomes et podem donar " + dispensador.getStock() + "xiclets, no hi ha mes stock");
                 dispensador.ventaStock(dispensador.getStock());
                 if (reposador.isActive()) {
-                    System.out.println("Avisem el noi, hi ha reposat 5 xiclets");
+                    System.out.println("S'ha avisat al magatzem, han reposat 5 xiclets mes");
                     dispensador.setStock(reposador.reposar());
                 } else {
                     quedenXiclets = false;
