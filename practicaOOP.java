@@ -17,15 +17,15 @@ class Dispensador {
 	}
 
 	public int getStock(){
-		return this.stock;
+		return stock;
 	}
 
 	public void ventaStock(int venda){
-		this.stock -= venda;
+		stock -= venda;
 	}
 	
 	public void setStock(int newStock){
-		this.stock += newStock;
+		stock += newStock;
 	}
 }
 
@@ -33,26 +33,29 @@ class Dispensador {
 class Reposador {
 	boolean actiu;
 	int stockMagatzem;
-	int maxViatges;
+	int viatges;
+	int cantitatReposar;
 
 	Reposador(){
 		this.actiu = true;
 		this.stockMagatzem = 20;
-		this.maxViatges = 2;
+		this.viatges = 2;
+		this.cantitatReposar = 5;
 	}
 
 	public boolean isActive(){
-		return this.actiu;
+		return actiu;
 	}
 
 	public int reposar(){
-		this.stockMagatzem -= 5;
-		this.maxViatges -= 1;
-		if(this.maxViatges==0) {
-			this.actiu = false;
+
+		stockMagatzem -= 5;
+		viatges -= 1;
+		if(viatges==0) {
+			actiu = false;
 			System.out.println("Ultima reposada, el reposador plega per avui");
 		}
-		return 5;
+		return cantitatReposar;
 	}
 }
 
