@@ -4,11 +4,10 @@ class etapaVida{
 	static final int EDAT_MIN = 0;
 	static final int EDAT_MAX = 150;
 	static final String[] etapas = {"nado","nen","pre-adolescent","adolescent","jove","adult","ancia"};
+	
 	public static void main(String[] args) {
-		int edat;
 		String etapa;
-		edat = getUserInput("Introdueix una edat",EDAT_MIN,EDAT_MAX);
-		etapa = edatAetapa(edat);
+		etapa = edatAetapa(getUserInput("Introdueix una edat",EDAT_MIN,EDAT_MAX));
 		System.out.printf("L'edat introduida es correspon a la etapa de vida: %s.",etapa);
 	}
 
